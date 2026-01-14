@@ -1,11 +1,10 @@
 public class Nemo {
     public static void main(String[] args) {
-        String logo = " _______                         \n"
-                + " \\      \\   ____   _____   ____  \n"
-                + " /   |   \\_/ __ \\ /     \\ /  _ \\ \n"
-                + "/    |    \\  ___/|  Y Y  (  <_> )\n"
-                + "\\____|__  /\\___  >__|_|  /\\____/ \n"
-                + "        \\/     \\/      \\/        \n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("____________________________________________________________\r\n" + //
+                " Hello! I'm Nemo!\r\n" + //
+                " What can I do for you?\r\n" + //
+                "____________________________________________________________\r\n" + //
+                " Bye. Hope to see you again soon!\r\n" + //
+                "____________________________________________________________");
     }
 }
