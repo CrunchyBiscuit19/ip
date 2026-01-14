@@ -1,24 +1,29 @@
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Nemo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Store store = new Store();
         
         System.out.println("____________________________________________________________\r\n" + 
                 " Hello! I'm Nemo!\r\n" + 
                 " What can I do for you?\r\n" +
                 "____________________________________________________________");
         
-        String command = "";
-        while (!command.equals(Command.BYE.toString())) {
+        String input = "";
+        while (!input.equals(Command.BYE.toString())) {
             System.out.print("> ");
-            command = scanner.nextLine();
+            input = scanner.nextLine();
             System.out.println("____________________________________________________________");
-            if (command.equals(Command.BYE.toString())) {
-                System.out.println("Bye. Hope to see you again soon!");
+
+            Optional<Command> processed = Command.fromString(input);
+            if (processed.isPresent()) {
+                processed.get().operation(store);
             } else {
-                System.out.println(command);
+                System.out.println("Nothing done");
             }
+
             System.out.println("____________________________________________________________");
         }
 
