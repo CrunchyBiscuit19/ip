@@ -13,6 +13,10 @@ public enum Command {
     LIST("list") {
         @Override
         public void operation(Store store, String args) {
+            if (store.size() == 0) {
+                System.out.println("Nothing in the list yet.");
+                return;
+            }
             System.out.println("Here are the tasks in your list:");
             System.out.println(store.generateList());
         }

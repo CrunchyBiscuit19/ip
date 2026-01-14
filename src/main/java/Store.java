@@ -21,8 +21,6 @@ public class Store {
     }
 
     String generateList() {
-        if (this.store.isEmpty())
-            return "Nothing added.";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < store.size(); i++) {
             sb.append(MessageFormat.format("{0}.[{1}] {2}\n", String.format("%03d", i + 1),

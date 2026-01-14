@@ -26,8 +26,7 @@ public class Nemo {
                 if (command.isPresent()) {
                     command.get().operation(store, args);
                 } else {
-                    store.add(input);
-                    System.out.println(MessageFormat.format("Added: {0}", input));
+                    System.out.println("Not a command.");
                 }
             }
 
