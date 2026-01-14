@@ -1,5 +1,6 @@
 import java.util.Optional;
 import java.util.Scanner;
+import java.text.MessageFormat;
 
 public class Nemo {
     public static void main(String[] args) {
@@ -21,7 +22,8 @@ public class Nemo {
             if (processed.isPresent()) {
                 processed.get().operation(store);
             } else {
-                System.out.println("Nothing done");
+                store.add(input);
+                System.out.println(MessageFormat.format("Added: {0}", input));
             }
 
             System.out.println("____________________________________________________________");

@@ -1,7 +1,4 @@
-import java.text.MessageFormat;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public enum Command {
@@ -15,7 +12,7 @@ public enum Command {
     LIST("list") {
         @Override
         public void operation(Store store) {
-            //System.out.println(store.generateList());
+            System.out.println(store.generateList());
         }
     };
 
