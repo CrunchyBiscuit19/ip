@@ -1,11 +1,15 @@
-public class Task {
-    protected String description;
+abstract public class Task {
     protected boolean done;
+    protected String goal;
 
-    public Task(String description) {
-        this.description = description;
+    public Task(String goal) {
+        this.goal = goal;
         this.done = false;
     }
+    
+    abstract public String getDescription(); 
+
+    abstract public String getTypeIcon();
 
     public String getStatusIcon() {
         return (done ? "X" : " "); // mark done task with X

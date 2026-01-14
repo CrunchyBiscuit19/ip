@@ -29,7 +29,7 @@ public enum Command {
             Task task = potentialTask.get();
             task.mark();
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println(MessageFormat.format("[{0}] {1}", task.getStatusIcon(), task.description));
+            System.out.println(MessageFormat.format("[{0}] {1}", task.getStatusIcon(), task.getDescription()));
         }
     },
     UNMARK("unmark") {
@@ -40,7 +40,7 @@ public enum Command {
             Task task = potentialTask.get();
             task.unmark();
             System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(MessageFormat.format("[{0}] {1}", task.getStatusIcon(), task.description));
+            System.out.println(MessageFormat.format("[{0}] {1}", task.getStatusIcon(), task.getDescription()));
         }
     };
 
