@@ -28,4 +28,9 @@ abstract public class Task {
     public void unmark() {
         done = false;
     }
+
+    @Override
+    public String toString() {
+        return getSummary();
+    }
 }
