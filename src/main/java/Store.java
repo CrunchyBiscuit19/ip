@@ -16,6 +16,10 @@ public class Store {
         this.store.add(new Task(itemDescription));
     }
 
+    int size() {
+        return this.store.size();
+    }
+
     String generateList() {
         if (this.store.isEmpty())
             return "Nothing added.";

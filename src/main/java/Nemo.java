@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.text.MessageFormat;
 
 public class Nemo {
-    public static void main(String[] args) {
+    public static void main(String[] args1) {
         Scanner scanner = new Scanner(System.in);
         Store store = new Store();
         
@@ -18,12 +18,17 @@ public class Nemo {
             input = scanner.nextLine();
             System.out.println("____________________________________________________________");
 
-            Optional<Command> processed = Command.fromString(input);
-            if (processed.isPresent()) {
-                processed.get().operation(store);
-            } else {
-                store.add(input);
-                System.out.println(MessageFormat.format("Added: {0}", input));
+            if (!input.isEmpty()) {
+                String[] splitInput = input.split(" ", 2);
+                String potentialCommand = splitInput[0];
+                String args = splitInput.length >= 2 ? splitInput[1] : "";
+                Optional<Command> command = Command.fromString(potentialCommand);
+                if (command.isPresent()) {
+                    command.get().operation(store, args);
+                } else {
+                    store.add(input);
+                    System.out.println(MessageFormat.format("Added: {0}", input));
+                }
             }
 
             System.out.println("____________________________________________________________");
