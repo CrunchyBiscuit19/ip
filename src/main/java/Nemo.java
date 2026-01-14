@@ -5,6 +5,7 @@ public class Nemo {
     public static void main(String[] args1) {
         Scanner scanner = new Scanner(System.in);
         Store store = new Store();
+        Command.assignStore(store);
         
         System.out.println("____________________________________________________________\r\n" + 
                 " Hello! I'm Nemo!\r\n" + 
@@ -23,7 +24,7 @@ public class Nemo {
                 String args = splitInput.length >= 2 ? splitInput[1] : "";
                 Optional<Command> command = Command.fromString(potentialCommand);
                 if (command.isPresent()) {
-                    command.get().operation(store, args);
+                    command.get().operation(args);
                 } else {
                     System.out.println("Not a command.");
                 }

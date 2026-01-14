@@ -6,13 +6,13 @@ public enum Command {
     // Solution below adapted from https://stackoverflow.com/a/14968372
     BYE("bye") {
         @Override
-        public void operation(Store store, String args) {
+        public void operation(String args) {
             System.out.println("Bye. Hope to see you again soon!");
         }
     },
     LIST("list") {
         @Override
-        public void operation(Store store, String args) {
+        public void operation(String args) {
             if (store.size() == 0) {
                 System.out.println("Nothing in the list yet.");
                 return;
@@ -23,7 +23,7 @@ public enum Command {
     },
     MARK("mark") {
         @Override
-        public void operation(Store store, String args) {
+        public void operation(String args) {
             Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
             if (!potentialTask.isPresent()) return;
             Task task = potentialTask.get();
@@ -34,7 +34,7 @@ public enum Command {
     },
     UNMARK("unmark") {
         @Override
-        public void operation(Store store, String args) {
+        public void operation(String args) {
             Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
             if (!potentialTask.isPresent()) return;
             Task task = potentialTask.get();
@@ -71,7 +71,7 @@ public enum Command {
         return Optional.empty();
     }
 
-    abstract void operation(Store store, String args);
+    abstract void operation(String args);
 
     Optional<Task> parseTaskId(Store store, String toParse) {
         int id = 0;
