@@ -18,7 +18,7 @@ abstract public class Task {
     }
 
     public String getSummary() {
-        return MessageFormat.format("[{0}][{1}] {2}\n", getTypeIcon(), getStatusIcon(), getDescription());
+        return MessageFormat.format("[{0}][{1}] {2}", getTypeIcon(), getStatusIcon(), getDescription());
     }
 
     public void mark() {

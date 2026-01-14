@@ -26,7 +26,7 @@ public class Nemo {
                 if (command.isPresent()) {
                     command.get().operation(args);
                 } else {
-                    System.out.println("Not a command.");
+                    System.err.println("Not a command.");
                 }
             }
 
