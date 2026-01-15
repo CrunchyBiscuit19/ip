@@ -53,7 +53,7 @@ public enum Command {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Deadline deadline = new Deadline(argMap);
                 store.addAndReport(deadline);
-            } catch (ParseException e) {
+            } catch (ParseException e) { 
                 System.err.println(e.getMessage());
                 return;
             }
