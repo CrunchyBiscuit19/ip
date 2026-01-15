@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.text.MessageFormat;
 import java.text.ParseException;
 
 public enum Command {
@@ -38,7 +39,10 @@ public enum Command {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Todo todo = new Todo(argMap);
-                store.addAndReport(todo);
+                store.add(todo);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(todo.getSummary());
+                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) {
                 System.err.println(e.getMessage());
                 return;
@@ -51,7 +55,10 @@ public enum Command {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Deadline deadline = new Deadline(argMap);
-                store.addAndReport(deadline);
+                store.add(deadline);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(deadline.getSummary());
+                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) { 
                 System.err.println(e.getMessage());
                 return;
@@ -64,10 +71,30 @@ public enum Command {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Event event = new Event(argMap);
-                store.addAndReport(event);
+                store.add(event);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(event.getSummary());
+                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) {
                 System.err.println(e.getMessage());
                 return;
+            }
+        }
+    },
+    DELETE("delete") {
+        @Override
+        public void operation(String args) {
+            try {
+                Task task = store.get(Integer.parseInt(args) - 1);
+                String taskSummary = task.getSummary();
+                store.remove(Integer.parseInt(args) - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(taskSummary);
+                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
+            } catch (NumberFormatException e) {
+                System.err.println("Not task ID.");
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println("Invalid task ID.");
             }
         }
     };
@@ -106,20 +133,9 @@ public enum Command {
         return this.command;
     }
 
-    private static Task parseTaskId(Store store, String toParse) throws NumberFormatException, IndexOutOfBoundsException {
-        try {
-            int id = Integer.parseInt(toParse) - 1;
-            return store.get(id);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Not task ID.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Invalid task ID.");
-        }
-    }
-
     private static void changeMark(boolean mark, String args) {
         try {
-            Task task = parseTaskId(store, args.split(" ")[0]);
+            Task task = store.get(Integer.parseInt(args) - 1);
             if (mark) {
                 task.mark();
                 System.out.println("Nice! I've marked this task as done:");
@@ -128,8 +144,10 @@ public enum Command {
                 System.out.println("OK, I've marked this task as not done yet:");
             }
             System.out.println(task.getSummary());
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Not task ID.");
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Invalid task ID.");
         }
     }
 }

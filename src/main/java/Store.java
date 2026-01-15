@@ -16,11 +16,8 @@ public class Store {
         this.store.add(task);
     }
 
-    void addAndReport(Task task) {
-        add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.getSummary());
-        System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", this.store.size()));
+    void remove(int i) {
+        this.store.remove(i);
     }
 
     int size() {
