@@ -44,7 +44,7 @@ public enum Command {
                 System.out.println(todo.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) {
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
                 return;
             }
         }
@@ -60,7 +60,7 @@ public enum Command {
                 System.out.println(deadline.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) { 
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
                 return;
             }
         }
@@ -76,7 +76,7 @@ public enum Command {
                 System.out.println(event.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (ParseException e) {
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
                 return;
             }
         }
@@ -92,9 +92,9 @@ public enum Command {
                 System.out.println(taskSummary);
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
             } catch (NumberFormatException e) {
-                System.err.println("Not task ID.");
+                System.out.println("Not task ID.");
             } catch (IndexOutOfBoundsException e) {
-                System.err.println("Invalid task ID.");
+                System.out.println("Invalid task ID.");
             }
         }
     };
@@ -145,9 +145,9 @@ public enum Command {
             }
             System.out.println(task.getSummary());
         } catch (NumberFormatException e) {
-            System.err.println("Not task ID.");
+            System.out.println("Not task ID.");
         } catch (IndexOutOfBoundsException e) {
-            System.err.println("Invalid task ID.");
+            System.out.println("Invalid task ID.");
         }
     }
 }

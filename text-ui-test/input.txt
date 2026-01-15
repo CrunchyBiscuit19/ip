@@ -18,7 +18,7 @@ event project meeting / from Aug 6th 2pm /to 4pm
 event /from Aug 6th 2pm /to 4pm
 event project meeting /from Aug 6th 2pm /to 4pm 
 list
-exercising /to 4pm /from Aug 7th 2pm 
+event exercising /to 4pm /from Aug 7th 2pm 
 list
 todo join sports club
 todo borrow book
@@ -52,8 +52,8 @@ delete 7
 list
 delete 1
 list
-delete 6
+delete 5
 list
-delete 2
+delete 3
 list
 bye

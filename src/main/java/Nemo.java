@@ -24,7 +24,7 @@ public class Nemo {
                 Command command = Command.fromString(commandStr);
                 command.operation(args);
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                System.out.println(e.getMessage());
             }
 
             System.out.println("____________________________________________________________");
