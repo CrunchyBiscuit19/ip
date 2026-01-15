@@ -1,0 +1,59 @@
+wrong
+list
+todo
+todo read book
+list
+deadline
+deadline return book
+deadline return book /wrong June 6th 
+deadline return book / by June 6th 
+deadline /by June 6th 
+deadline return book /by June 6th
+list
+event project meeting
+event project meeting /from Aug 6th 2pm
+event project meeting /from Aug 6th 2pm
+event project meeting /to Aug 6th 2pm
+event project meeting / from Aug 6th 2pm /to 4pm
+event /from Aug 6th 2pm /to 4pm
+event project meeting /from Aug 6th 2pm /to 4pm 
+list
+exercising /to 4pm /from Aug 7th 2pm 
+list
+todo join sports club
+todo borrow book
+mark 0
+list
+mark 7
+list
+mark 1
+list
+mark 6
+list
+mark 2
+list
+mark 4
+list
+mark 5
+list
+unmark 0
+list
+unmark 7
+list
+unmark 1
+list
+unmark 6
+list
+unmark 5
+list
+delete 0
+list
+delete 7
+list
+delete 1
+list
+delete 6
+list
+delete 2
+list
+bye

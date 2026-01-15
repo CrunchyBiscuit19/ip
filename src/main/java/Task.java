@@ -7,7 +7,7 @@ abstract public class Task {
     protected String goal;
 
     public Task(HashMap<String, String> argMap) throws ParseException {
-        if (!argMap.containsKey("mainArg")) {
+        if (argMap.get("mainArg").isBlank()) {
             throw new ParseException("Task argument requires a goal", 0);
         }
         this.goal = argMap.get("mainArg");
