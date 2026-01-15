@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Optional;
 import java.text.ParseException;
 
 public enum Command {
@@ -93,11 +92,11 @@ public enum Command {
         Command.store = store;
     }
 
-    public static Optional<Command> fromString(String input) {
+    public static Command fromString(String input) throws NotCommandException {
         if (commandMap.containsKey(input.toLowerCase())) {
-            return Optional.of(commandMap.get(input));
+            return commandMap.get(input);
         }
-        return Optional.empty();
+        throw new NotCommandException("Not valid command.");
     }
 
     abstract void operation(String args);
@@ -107,35 +106,30 @@ public enum Command {
         return this.command;
     }
 
-    private static Optional<Task> parseTaskId(Store store, String toParse) {
-        int id = 0;
+    private static Task parseTaskId(Store store, String toParse) throws NumberFormatException, IndexOutOfBoundsException {
         try {
-            id = Integer.parseInt(toParse) - 1;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.err.println("Incorrect arguments, try again.");
-            return Optional.empty();
+            int id = Integer.parseInt(toParse) - 1;
+            return store.get(id);
         } catch (NumberFormatException e) {
-            System.err.println("Not item ID, try again.");
-            return Optional.empty();
+            throw new NumberFormatException("Not task ID.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Invalid task ID.");
         }
-        if (id >= store.size() || id < 0) {
-            System.err.println("Invalid item ID, try again.");
-            return Optional.empty();
-        }
-        return Optional.of(store.get(id));
     }
 
     private static void changeMark(boolean mark, String args) {
-        Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
-        if (!potentialTask.isPresent()) return;
-        Task task = potentialTask.get();
-        if (mark) {
-            task.mark();
-            System.out.println("Nice! I've marked this task as done:");
-        } else {
-            task.unmark();
-            System.out.println("OK, I've marked this task as not done yet:");
+        try {
+            Task task = parseTaskId(store, args.split(" ")[0]);
+            if (mark) {
+                task.mark();
+                System.out.println("Nice! I've marked this task as done:");
+            } else {
+                task.unmark();
+                System.out.println("OK, I've marked this task as not done yet:");
+            }
+            System.out.println(task.getSummary());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
-        System.out.println(task.getSummary());
     }
 }
