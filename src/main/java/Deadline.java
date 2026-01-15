@@ -1,11 +1,16 @@
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.util.HashMap;
 
 public class Deadline extends Task {
     private String by;
 
-    Deadline(String goal, String by) {
-        super(goal);
-        this.by = by;
+    Deadline(HashMap<String, String> argMap) throws ParseException {
+        super(argMap);
+        if (!argMap.containsKey("by")) {
+            throw new ParseException("Task argument requires a by date", 0);
+        }
+        this.by = argMap.get("by");
     }
 
     @Override

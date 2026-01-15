@@ -1,6 +1,9 @@
+import java.text.ParseException;
+import java.util.HashMap;
+
 public class Todo extends Task {
-    Todo(String goal) {
-        super(goal);
+    Todo(HashMap<String, String> argMap) throws ParseException {
+        super(argMap);
     }
 
     @Override

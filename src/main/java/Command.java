@@ -1,8 +1,6 @@
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.text.MessageFormat;
+import java.text.ParseException;
 
 public enum Command {
     // Solution below adapted from https://stackoverflow.com/a/14968372
@@ -45,96 +43,43 @@ public enum Command {
             System.out.println(task.getSummary());
         }
     },
-    Todo("todo") {
+    TODO("todo") {
         @Override
         public void operation(String args) {
-            if (args.isBlank()) {
-                System.err.println("Todo goal cannot be empty");
+            try {
+                HashMap<String, String> argMap = Task.parseArgs(args);
+                Todo todo = new Todo(argMap);
+                store.addAndReport(todo);
+            } catch (ParseException e) {
+                System.err.println(e.getMessage());
                 return;
             }
-
-            Todo todo = new Todo(args);
-            store.add(todo);
-
-            System.out.println("Got it. I've added this task:");
-            System.out.println(todo.getSummary());
-            System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
         }
     },
     DEADLINE("deadline") {
         @Override
         public void operation(String args) {
-            Map<String, String> argMap = new HashMap<>();
-            String[] argTokens = args.split(" ");
-            String lastKey = null;
-            StringBuilder goalStringBuilder = new StringBuilder();
-            for (String token : argTokens) {
-                if (token.startsWith("/")) {
-                    lastKey = token.substring(1);
-                    argMap.put(lastKey, null);
-                } else if (lastKey != null) {
-                    argMap.put(lastKey, token);
-                } else {
-                    goalStringBuilder.append(token);
-                    goalStringBuilder.append(' ');
-                }
-            }
-            String goal = goalStringBuilder.toString().trim();
-
-            if (argMap.get("by") == null) {
-                System.err.println("Deadline must have a by date.");
+            try {
+                HashMap<String, String> argMap = Task.parseArgs(args);
+                Deadline deadline = new Deadline(argMap);
+                store.addAndReport(deadline);
+            } catch (ParseException e) {
+                System.err.println(e.getMessage());
                 return;
             }
-
-            if (goal.isBlank()) {
-                System.err.println("Deadline must have a goal.");
-                return;
-            }
-            
-            Deadline deadline = new Deadline(goal, argMap.get("by"));
-            store.add(deadline);
-
-            System.out.println("Got it. I've added this task:");
-            System.out.println(deadline.getSummary());
-            System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
         }
     },
     EVENT("event") {
         @Override
         public void operation(String args) {
-            Map<String, String> argMap = new HashMap<>();
-            String[] argTokens = args.split(" ");
-            String lastKey = null;
-            StringBuilder goalStringBuilder = new StringBuilder();
-            for (String token : argTokens) {
-                if (token.startsWith("/")) {
-                    lastKey = token.substring(1);
-                    argMap.put(lastKey, null);
-                } else if (lastKey != null) {
-                    argMap.put(lastKey, token);
-                } else {
-                    goalStringBuilder.append(token);
-                    goalStringBuilder.append(' ');
-                }
-            }
-            String goal = goalStringBuilder.toString().trim();
-
-            if (argMap.get("from") == null || argMap.get("to") == null ) {
-                System.err.println("Event must have a from date.");
+            try {
+                HashMap<String, String> argMap = Task.parseArgs(args);
+                Event event = new Event(argMap);
+                store.addAndReport(event);
+            } catch (ParseException e) {
+                System.err.println(e.getMessage());
                 return;
             }
-
-            if (goal.isBlank()) {
-                System.err.println("Event must have a goal.");
-                return;
-            }
-
-            Event event = new Event(goal, argMap.get("from"), argMap.get("to"));
-            store.add(event);
-
-            System.out.println("Got it. I've added this task:");
-            System.out.println(event.getSummary());
-            System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
         }
     };
 
@@ -167,6 +112,11 @@ public enum Command {
 
     abstract void operation(String args);
 
+    @Override
+    public String toString() {
+        return this.command;
+    }
+
     private static Optional<Task> parseTaskId(Store store, String toParse) {
         int id = 0;
         try {
@@ -183,10 +133,5 @@ public enum Command {
             return Optional.empty();
         }
         return Optional.of(store.get(id));
-    }
-
-    @Override
-    public String toString() {
-        return this.command;
     }
 }
