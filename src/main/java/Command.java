@@ -24,23 +24,13 @@ public enum Command {
     MARK("mark") {
         @Override
         public void operation(String args) {
-            Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
-            if (!potentialTask.isPresent()) return;
-            Task task = potentialTask.get();
-            task.mark();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task.getSummary());
+            changeMark(true, args);
         }
     },
     UNMARK("unmark") {
         @Override
         public void operation(String args) {
-            Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
-            if (!potentialTask.isPresent()) return;
-            Task task = potentialTask.get();
-            task.unmark();
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(task.getSummary());
+            changeMark(false, args);
         }
     },
     TODO("todo") {
@@ -133,5 +123,19 @@ public enum Command {
             return Optional.empty();
         }
         return Optional.of(store.get(id));
+    }
+
+    private static void changeMark(boolean mark, String args) {
+        Optional<Task> potentialTask = parseTaskId(store, args.split(" ")[0]);
+        if (!potentialTask.isPresent()) return;
+        Task task = potentialTask.get();
+        if (mark) {
+            task.mark();
+            System.out.println("Nice! I've marked this task as done:");
+        } else {
+            task.unmark();
+            System.out.println("OK, I've marked this task as not done yet:");
+        }
+        System.out.println(task.getSummary());
     }
 }
