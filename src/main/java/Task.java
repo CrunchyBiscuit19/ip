@@ -22,18 +22,19 @@ abstract public class Task {
         HashMap<String, StringBuilder> argBuilderMap = new HashMap<>();
         String[] argTokens = args.split(" ");
         String lastKey = "mainArg";
+        argBuilderMap.put(lastKey, new StringBuilder());
         for (String token : argTokens) {
             if (token.startsWith("/")) {
                 lastKey = token.substring(1);
                 argBuilderMap.put(lastKey, new StringBuilder());
             } else {
-                argBuilderMap.get(lastKey).append(token);
+                argBuilderMap.get(lastKey).append(token).append(" ");
             }
         }
 
         HashMap<String, String> argMap = new HashMap<>();
         for (HashMap.Entry<String, StringBuilder> entry : argBuilderMap.entrySet()) {
-            argMap.put(entry.getKey(), entry.getValue().toString());
+            argMap.put(entry.getKey(), entry.getValue().toString().trim());
         }
 
         return argMap;
