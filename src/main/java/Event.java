@@ -2,20 +2,36 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 
+enum EventArg {
+    FROM("from"),
+    TO("to");
+
+    private final String name;
+
+    EventArg(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+}
+
 public class Event extends Task {
     private String from;
     private String to;
 
     Event(HashMap<String, String> argMap) throws ParseException {
         super(argMap);
-        if (!argMap.containsKey("from")) {
+        if (!argMap.containsKey(EventArg.FROM.toString())) {
             throw new ParseException("Task argument requires a from date", 0);
         }
-        if (!argMap.containsKey("to")) {
+        if (!argMap.containsKey(EventArg.TO.toString())) {
             throw new ParseException("Task argument requires a to date", 0);
         }
-        this.from = argMap.get("from");
-        this.to = argMap.get("to");
+        this.from = argMap.get(EventArg.FROM.toString());
+        this.to = argMap.get(EventArg.TO.toString());
     }
 
     @Override

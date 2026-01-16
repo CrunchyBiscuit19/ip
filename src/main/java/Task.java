@@ -2,15 +2,30 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 
+enum TaskArg {
+    MAINARG("mainArg");
+
+    private final String name;
+
+    TaskArg(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+}
+
 abstract public class Task {
     protected boolean done;
     protected String goal;
 
     public Task(HashMap<String, String> argMap) throws ParseException {
-        if (argMap.get("mainArg").isBlank()) {
+        if (argMap.get(TaskArg.MAINARG.toString()).isBlank()) {
             throw new ParseException("Task argument requires a goal", 0);
         }
-        this.goal = argMap.get("mainArg");
+        this.goal = argMap.get(TaskArg.MAINARG.toString());
         this.done = false;
     }
 
@@ -21,7 +36,7 @@ abstract public class Task {
 
         HashMap<String, StringBuilder> argBuilderMap = new HashMap<>();
         String[] argTokens = args.split(" ");
-        String lastKey = "mainArg";
+        String lastKey = TaskArg.MAINARG.toString();
         argBuilderMap.put(lastKey, new StringBuilder());
         for (String token : argTokens) {
             if (token.startsWith("/")) {
