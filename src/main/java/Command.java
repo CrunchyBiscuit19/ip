@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.text.MessageFormat;
-import java.text.ParseException;
 
 public enum Command {
     // Solution below adapted from https://stackoverflow.com/a/14968372
@@ -44,7 +43,7 @@ public enum Command {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(todo.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }
@@ -60,7 +59,7 @@ public enum Command {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(deadline.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (ParseException e) { 
+            } catch (Exception e) { 
                 System.out.println(e.getMessage());
                 return;
             }
@@ -76,7 +75,7 @@ public enum Command {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(event.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }

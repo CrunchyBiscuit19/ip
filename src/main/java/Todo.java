@@ -3,12 +3,12 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 public class Todo extends Task {
-    public Todo(String goal) {
-        super(goal);
-    }
-
     public Todo(String goal, boolean done) {
         super(goal, done);
+    }
+    
+    public Todo(String goal) {
+        this(goal, false);
     }
 
     public Todo(HashMap<String, String> argMap) throws ParseException {

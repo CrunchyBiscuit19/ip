@@ -1,5 +1,8 @@
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 enum TaskArg {
@@ -21,14 +24,13 @@ abstract public class Task {
     protected boolean done;
     protected String goal;
 
-    public Task(String goal) {
-        this.goal = goal;
-        this.done = false;
-    }
-
     public Task(String goal, boolean done) {
         this.goal = goal;
         this.done = done;
+    }
+
+    public Task(String goal) {
+        this(goal, false);
     }
 
     public Task(HashMap<String, String> argMap) throws ParseException {
@@ -90,5 +92,16 @@ abstract public class Task {
     @Override
     public String toString() {
         return getSummary();
+    }
+
+    protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
+        // Solution adapted from https://stackoverflow.com/a/22463063
+        String pattern = "dd-MM-yyyy HHmm";
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            return LocalDateTime.parse(rawDateTimeString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseException(MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern), pattern, 0);
+        }
     }
 }
