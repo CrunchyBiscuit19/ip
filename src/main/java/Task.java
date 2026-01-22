@@ -21,6 +21,16 @@ abstract public class Task {
     protected boolean done;
     protected String goal;
 
+    public Task(String goal) {
+        this.goal = goal;
+        this.done = false;
+    }
+
+    public Task(String goal, boolean done) {
+        this.goal = goal;
+        this.done = done;
+    }
+
     public Task(HashMap<String, String> argMap) throws ParseException {
         if (argMap.get(TaskArg.MAINARG.toString()).isBlank()) {
             throw new ParseException("Task argument requires a goal", 0);
@@ -58,6 +68,8 @@ abstract public class Task {
     abstract public String getDescription(); 
 
     abstract public String getTypeIcon();
+
+    abstract public String getSerialized();
 
     public String getStatusIcon() {
         return (done ? "X" : " "); // mark done task with X

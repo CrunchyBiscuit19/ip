@@ -20,7 +20,17 @@ enum DeadlineArg {
 public class Deadline extends Task {
     private String by;
 
-    Deadline(HashMap<String, String> argMap) throws ParseException {
+    public Deadline(String goal, String by) {
+        super(goal);
+        this.by = by;
+    }
+
+    public Deadline(String goal, String by, boolean done) {
+        super(goal, done);
+        this.by = by;
+    }
+
+    public Deadline(HashMap<String, String> argMap) throws ParseException {
         super(argMap);
         if (!argMap.containsKey(DeadlineArg.BY.toString())) {
             throw new ParseException("Task argument requires a by date", 0);
@@ -36,5 +46,10 @@ public class Deadline extends Task {
     @Override
     public String getTypeIcon() {
         return "D";
+    }
+
+    @Override
+    public String getSerialized() {
+        return MessageFormat.format("{0} | {1} | {2} | {3}", getTypeIcon(), done ? 1 : 0, goal, by);
     }
 }
