@@ -49,7 +49,7 @@ public class Event extends Task {
 
     @Override
     public String getDescription() {
-        return MessageFormat.format("{0} (from: {1} to: {2})", goal, from, to);
+        return MessageFormat.format("{0} (from: {1} to: {2})", goal, from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")), to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
     }
 
     @Override

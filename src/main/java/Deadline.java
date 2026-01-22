@@ -42,7 +42,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDescription() {
-        return MessageFormat.format("{0} (by: {1})", goal, by);
+        return MessageFormat.format("{0} (by: {1})", goal, by.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
     }
 
     @Override

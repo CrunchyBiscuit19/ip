@@ -95,6 +95,7 @@ abstract public class Task {
     }
 
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
+        // Solution adapted from https://stackoverflow.com/a/22463063
         String pattern = "dd-MM-yyyy HHmm";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
