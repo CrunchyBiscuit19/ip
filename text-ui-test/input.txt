@@ -9,14 +9,21 @@ deadline return book /wrong June 6th
 deadline return book / by June 6th 
 deadline /by June 6th 
 deadline return book /by June 6th
+deadline return book /by 06-06-2010
+deadline return book /by 06-06-20101730
+deadline return book /by 06-32-2010
+deadline return book /by 13-32-2010
+deadline return book /by 06-06-2010 2430
+deadline return book /by 06-06-2010 1760
+deadline return book /by 06-06-2010 1730
 list
 event project meeting
-event project meeting /from Aug 6th 2pm
 event project meeting /from Aug 6th 2pm
 event project meeting /to Aug 6th 2pm
 event project meeting / from Aug 6th 2pm /to 4pm
 event /from Aug 6th 2pm /to 4pm
-event project meeting /from Aug 6th 2pm /to 4pm 
+event project meeting /from Aug 6th 2pm /to 4pm
+event project meeting /from 06-07-2010 1400 /to 06-07-2010 1600
 list
 event exercising /to 4pm /from Aug 7th 2pm 
 list

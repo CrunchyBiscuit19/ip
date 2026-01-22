@@ -36,20 +36,38 @@ ____________________________________________________________
 Task argument requires a goal
 ____________________________________________________________
 > ____________________________________________________________
+June 6th is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+06-06-2010 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+06-06-20101730 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+06-32-2010 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+13-32-2010 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+06-06-2010 2430 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
+06-06-2010 1760 is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
 Got it. I've added this task:
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: 6 June 2010 5PM)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][ ] return book (by: June 6th)
+002.[D][ ] return book (by: 6 June 2010 5PM)
 ____________________________________________________________
 > ____________________________________________________________
 Task argument requires a from date
-____________________________________________________________
-> ____________________________________________________________
-Task argument requires a to date
 ____________________________________________________________
 > ____________________________________________________________
 Task argument requires a to date
@@ -64,37 +82,37 @@ ____________________________________________________________
 Task argument requires a goal
 ____________________________________________________________
 > ____________________________________________________________
+Aug 6th 2pm is not a valid date for format dd-MM-yyyy HHmm.
+____________________________________________________________
+> ____________________________________________________________
 Got it. I've added this task:
-[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
 ____________________________________________________________
 > ____________________________________________________________
-Got it. I've added this task:
-[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-Now you have 4 tasks in the list.
+Aug 7th 2pm is not a valid date for format dd-MM-yyyy HHmm.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
 ____________________________________________________________
 > ____________________________________________________________
 Got it. I've added this task:
 [T][ ] join sports club
-Now you have 5 tasks in the list.
+Now you have 4 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Got it. I've added this task:
 [T][ ] borrow book
-Now you have 6 tasks in the list.
+Now you have 5 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -102,11 +120,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][ ] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -114,11 +131,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][ ] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Nice! I've marked this task as done:
@@ -127,50 +143,33 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][ ] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
-Nice! I've marked this task as done:
-[T][X] borrow book
-____________________________________________________________
-> ____________________________________________________________
-Here are the tasks in your list:
-001.[T][X] read book
-002.[D][ ] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][X] borrow book
-____________________________________________________________
-> ____________________________________________________________
-Nice! I've marked this task as done:
-[D][X] return book (by: June 6th)
+Invalid task ID.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][ ] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][X] borrow book
+002.[D][ ] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][ ] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Nice! I've marked this task as done:
-[E][X] exercising (from: Aug 7th 2pm to: 4pm)
+[D][X] return book (by: 6 June 2010 5PM)
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][X] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][ ] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Nice! I've marked this task as done:
@@ -179,11 +178,22 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][X] join sports club
-006.[T][X] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][ ] borrow book
+____________________________________________________________
+> ____________________________________________________________
+Nice! I've marked this task as done:
+[T][X] borrow book
+____________________________________________________________
+> ____________________________________________________________
+Here are the tasks in your list:
+001.[T][X] read book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][X] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -191,11 +201,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][X] join sports club
-006.[T][X] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][X] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -203,11 +212,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][X] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][X] join sports club
-006.[T][X] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][X] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 OK, I've marked this task as not done yet:
@@ -216,11 +224,21 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][X] join sports club
-006.[T][X] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][X] borrow book
+____________________________________________________________
+> ____________________________________________________________
+Invalid task ID.
+____________________________________________________________
+> ____________________________________________________________
+Here are the tasks in your list:
+001.[T][ ] read book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][X] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 OK, I've marked this task as not done yet:
@@ -229,24 +247,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][X] join sports club
-006.[T][ ] borrow book
-____________________________________________________________
-> ____________________________________________________________
-OK, I've marked this task as not done yet:
-[T][ ] join sports club
-____________________________________________________________
-> ____________________________________________________________
-Here are the tasks in your list:
-001.[T][ ] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -254,11 +258,10 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
+005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Invalid task ID.
@@ -266,47 +269,43 @@ ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
 001.[T][ ] read book
-002.[D][X] return book (by: June 6th)
-003.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-004.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-005.[T][ ] join sports club
-006.[T][ ] borrow book
-____________________________________________________________
-> ____________________________________________________________
-Noted. I've removed this task:
-[T][ ] read book
-Now you have 5 tasks in the list.
-____________________________________________________________
-> ____________________________________________________________
-Here are the tasks in your list:
-001.[D][X] return book (by: June 6th)
-002.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-003.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-004.[T][ ] join sports club
+002.[D][X] return book (by: 6 June 2010 5PM)
+003.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+004.[T][X] join sports club
 005.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Noted. I've removed this task:
-[T][ ] borrow book
+[T][ ] read book
 Now you have 4 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
-001.[D][X] return book (by: June 6th)
-002.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-003.[E][X] exercising (from: Aug 7th 2pm to: 4pm)
-004.[T][ ] join sports club
+001.[D][X] return book (by: 6 June 2010 5PM)
+002.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+003.[T][X] join sports club
+004.[T][ ] borrow book
+____________________________________________________________
+> ____________________________________________________________
+Invalid task ID.
+____________________________________________________________
+> ____________________________________________________________
+Here are the tasks in your list:
+001.[D][X] return book (by: 6 June 2010 5PM)
+002.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+003.[T][X] join sports club
+004.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Noted. I've removed this task:
-[E][X] exercising (from: Aug 7th 2pm to: 4pm)
+[T][X] join sports club
 Now you have 3 tasks in the list.
 ____________________________________________________________
 > ____________________________________________________________
 Here are the tasks in your list:
-001.[D][X] return book (by: June 6th)
-002.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
-003.[T][ ] join sports club
+001.[D][X] return book (by: 6 June 2010 5PM)
+002.[E][ ] project meeting (from: 6 July 2010 2PM to: 6 July 2010 4PM)
+003.[T][ ] borrow book
 ____________________________________________________________
 > ____________________________________________________________
 Bye. Hope to see you again soon!
