@@ -1,6 +1,7 @@
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 
 enum DeadlineArg {
     BY("by");
@@ -20,14 +21,13 @@ enum DeadlineArg {
 public class Deadline extends Task {
     private String by;
 
-    public Deadline(String goal, String by) {
-        super(goal);
-        this.by = by;
-    }
-
     public Deadline(String goal, String by, boolean done) {
         super(goal, done);
         this.by = by;
+    }
+    
+    public Deadline(String goal, String by) {
+        this(goal, by, false);
     }
 
     public Deadline(HashMap<String, String> argMap) throws ParseException {

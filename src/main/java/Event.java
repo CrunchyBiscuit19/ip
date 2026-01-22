@@ -22,16 +22,14 @@ public class Event extends Task {
     private String from;
     private String to;
 
-    public Event(String goal, String from, String to) {
-        super(goal);
-        this.from = from;
-        this.to = to;
-    }
-
     public Event(String goal, String from, String to, boolean done) {
         super(goal, done);
         this.from = from;
         this.to = to;
+    }
+
+    public Event(String goal, String from, String to) {
+        this(goal, from, to, false);
     }
 
     public Event(HashMap<String, String> argMap) throws ParseException {

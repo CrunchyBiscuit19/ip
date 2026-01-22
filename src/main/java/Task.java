@@ -21,14 +21,13 @@ abstract public class Task {
     protected boolean done;
     protected String goal;
 
-    public Task(String goal) {
-        this.goal = goal;
-        this.done = false;
-    }
-
     public Task(String goal, boolean done) {
         this.goal = goal;
         this.done = done;
+    }
+
+    public Task(String goal) {
+        this(goal, false);
     }
 
     public Task(HashMap<String, String> argMap) throws ParseException {
