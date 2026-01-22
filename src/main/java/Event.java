@@ -43,4 +43,9 @@ public class Event extends Task {
     public String getTypeIcon() {
         return "E";
     }
+
+    @Override
+    public String getSerialized() {
+        return MessageFormat.format("{0} | {1} | {2} | {3} | {4}", getTypeIcon(), done ? 1 : 0, goal, from, to);
+    }
 }

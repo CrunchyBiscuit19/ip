@@ -7,6 +7,7 @@ public enum Command {
     BYE("bye") {
         @Override
         public void operation(String args) {
+            store.save();
             System.out.println("Bye. Hope to see you again soon!");
         }
     },

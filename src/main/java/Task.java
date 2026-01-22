@@ -59,6 +59,8 @@ abstract public class Task {
 
     abstract public String getTypeIcon();
 
+    abstract public String getSerialized();
+
     public String getStatusIcon() {
         return (done ? "X" : " "); // mark done task with X
     }

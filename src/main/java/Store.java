@@ -1,5 +1,7 @@
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Store {
     private ArrayList<Task> store;
@@ -22,6 +24,23 @@ public class Store {
 
     int size() {
         return this.store.size();
+    }
+
+    void save() {        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < store.size(); i++) {
+            Task task = store.get(i);
+            sb.append(task.getSerialized());
+            sb.append('\n');
+        }
+
+        Path saveFilePath = Path.of(System.getProperty("user.home"), "NEMO", "data.txt");
+        try {
+            Files.createDirectories(saveFilePath.getParent());
+            Files.writeString(saveFilePath, sb.toString().trim());
+        } catch (Exception e) {
+            System.out.println("Something went wrong while saving your file.");
+        }
     }
 
     String generateList() {
