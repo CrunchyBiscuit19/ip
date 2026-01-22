@@ -1,5 +1,6 @@
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,20 +39,21 @@ public class Store {
         }
 
         for (String rawTask : rawTasks) {
-            String[] data = rawTask.split(" | ");
-            String type = data[0];
-            boolean done = data[1].equals("1") ? true : false;
-            String goal = data[2];
+            String[] data = rawTask.split("\\|");
+            System.out.println(new ArrayList<>(Arrays.asList(data)));
+            String type = data[0].trim();
+            boolean done = data[1].trim().equals("1") ? true : false;
+            String goal = data[2].trim();
             
             Task newTask = new Todo("");
             if (type.equals("T")) {
                 newTask = new Todo(goal, done);
             } else if (type.equals("D")) {
-                String by = data[3];
+                String by = data[3].trim();
                 newTask = new Deadline(goal, by, done);
             } else if (type.equals("E")) {
-                String from = data[3];
-                String to = data[4];
+                String from = data[3].trim();
+                String to = data[4].trim();
                 newTask = new Event(goal, from, to, done);
             }
             store.add(newTask);
