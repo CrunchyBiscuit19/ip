@@ -1,5 +1,8 @@
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 enum TaskArg {
@@ -89,5 +92,15 @@ abstract public class Task {
     @Override
     public String toString() {
         return getSummary();
+    }
+
+    protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
+        String pattern = "dd-MM-yyyy HHmm";
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            return LocalDateTime.parse(rawDateTimeString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseException(MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern), pattern, 0);
+        }
     }
 }

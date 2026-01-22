@@ -1,6 +1,5 @@
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,7 +39,6 @@ public class Store {
 
         for (String rawTask : rawTasks) {
             String[] data = rawTask.split("\\|");
-            System.out.println(new ArrayList<>(Arrays.asList(data)));
             String type = data[0].trim();
             boolean done = data[1].trim().equals("1") ? true : false;
             String goal = data[2].trim();
