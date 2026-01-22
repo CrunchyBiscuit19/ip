@@ -33,7 +33,7 @@ public enum Command {
         public void operation(String args) {
             changeMark(false, args);
         }
-    },
+    }, 
     TODO("todo") {
         @Override
         public void operation(String args) {
