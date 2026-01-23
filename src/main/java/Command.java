@@ -6,6 +6,7 @@ public enum Command {
     BYE("bye") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = true;
             loader.save(store);
             System.out.println("Bye. Hope to see you again soon!");
         }
@@ -13,6 +14,7 @@ public enum Command {
     LIST("list") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
             if (store.size() == 0) {
                 System.out.println("Nothing in the list yet.");
                 return;
@@ -36,6 +38,7 @@ public enum Command {
     TODO("todo") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Todo todo = new Todo(argMap);
@@ -52,6 +55,7 @@ public enum Command {
     DEADLINE("deadline") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Deadline deadline = new Deadline(argMap);
@@ -68,6 +72,7 @@ public enum Command {
     EVENT("event") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Event event = new Event(argMap);
@@ -84,6 +89,7 @@ public enum Command {
     DELETE("delete") {
         @Override
         public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
             try {
                 Task task = store.get(Integer.parseInt(args) - 1);
                 String taskSummary = task.getSummary();
@@ -101,6 +107,7 @@ public enum Command {
 
     private final String command;
     private static HashMap<String, Command> commandMap;
+    private static boolean shouldExit;
 
     Command(String command) {
         this.command = command;
@@ -129,6 +136,7 @@ public enum Command {
     }
 
     private static void changeMark(String args, Store store, boolean mark) {
+        shouldExit = false;
         try {
             Task task = store.get(Integer.parseInt(args) - 1);
             if (mark) {
@@ -144,5 +152,9 @@ public enum Command {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid task ID.");
         }
+    }
+
+    public static boolean isExit() {
+        return shouldExit;
     }
 }

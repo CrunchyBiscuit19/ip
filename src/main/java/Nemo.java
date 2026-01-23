@@ -1,5 +1,4 @@
 import java.nio.file.Path;
-import java.util.Scanner;
 
 public class Nemo {
     private Store store;
@@ -12,33 +11,14 @@ public class Nemo {
     }
 
     public void run() {
-        Scanner scanner = new Scanner(System.in);
+        Ui.showWelcomeMessage();
 
-        System.out.println("____________________________________________________________\r\n" +
-                " Hello! I'm Nemo!\r\n" +
-                " What can I do for you?\r\n" +
-                "____________________________________________________________");
-
-        String input = "";
-        while (!input.equals(Command.BYE.toString())) {
-            System.out.print("> ");
-            input = scanner.nextLine();
-            System.out.println("____________________________________________________________");
-
-            String[] splitInput = input.split(" ", 2);
-            String commandStr = splitInput[0];
-            String args = splitInput.length >= 2 ? splitInput[1] : "";
-            try {
-                Command command = Command.fromString(commandStr);
-                command.operation(args, store, loader);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            System.out.println("____________________________________________________________");
+        while (!Command.isExit()) {
+            String input = Ui.getNextInput();
+            Ui.processInput(input, store, loader);
         }
 
-        scanner.close();
+        Ui.cleanup();
     }
 
     public static void main(String[] args1) {
