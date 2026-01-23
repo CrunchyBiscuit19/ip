@@ -6,7 +6,7 @@ public enum Command {
     BYE("bye") {
         @Override
         public void operation(String args) {
-            store.save();
+            loader.save();
             System.out.println("Bye. Hope to see you again soon!");
         }
     },
@@ -101,6 +101,7 @@ public enum Command {
 
     private final String command;
     private static Store store;
+    private static Loader loader;
     private static HashMap<String, Command> commandMap;
 
     Command(String command) {
@@ -117,6 +118,10 @@ public enum Command {
 
     public static void assignStore(Store store) {
         Command.store = store;
+    }
+
+    public static void assignLoader(Loader loader) {
+        Command.loader = loader;
     }
 
     public static Command fromString(String input) throws NotCommandException {

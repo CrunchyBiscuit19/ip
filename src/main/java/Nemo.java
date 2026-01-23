@@ -1,10 +1,13 @@
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Nemo {
     public static void main(String[] args1) {
         Scanner scanner = new Scanner(System.in);
         Store store = new Store();
+        Loader loader = new Loader(store, Path.of(System.getProperty("user.home"), "NEMO", "data.txt"));
         Command.assignStore(store);
+        Command.assignLoader(loader);
         
         System.out.println("____________________________________________________________\r\n" + 
                 " Hello! I'm Nemo!\r\n" + 
