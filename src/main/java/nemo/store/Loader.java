@@ -1,3 +1,9 @@
+package nemo.store;
+
+import nemo.task.Task;
+import nemo.task.Todo;
+import nemo.task.Deadline;
+import nemo.task.Event;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +17,7 @@ public class Loader {
         this.saveFilePath = saveFilePath;
     }
 
-    void load(Store store) {
+    public void load(Store store) {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
             rawTasks = new ArrayList<>(Files.lines(saveFilePath).toList());
@@ -40,7 +46,7 @@ public class Loader {
         }
     }
 
-    void save(Store store) {        
+    public void save(Store store) {        
         StringBuilder sb = new StringBuilder();
         Iterator<Task> storeIt = store.iterator();
         while (storeIt.hasNext()) {

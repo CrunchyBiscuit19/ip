@@ -1,3 +1,8 @@
+package nemo.ui;
+
+import nemo.command.Command;
+import nemo.store.Store;
+import nemo.store.Loader;
 import java.util.Scanner;
 
 public class Ui {
@@ -22,8 +27,7 @@ public class Ui {
         String commandStr = splitInput[0];
         String args = splitInput.length >= 2 ? splitInput[1] : "";
         try {
-            Command command = Command.fromString(commandStr);
-            command.operation(args, store, loader);
+            Command.fromString(commandStr).operation(args, store, loader);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

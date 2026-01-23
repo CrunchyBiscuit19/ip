@@ -1,3 +1,12 @@
+package nemo.command;
+
+import nemo.store.Store;
+import nemo.store.Loader;
+import nemo.task.Task;
+import nemo.task.Todo;
+import nemo.task.Deadline;
+import nemo.task.Event;
+import nemo.exception.NotCommandException;
 import java.util.HashMap;
 import java.text.MessageFormat;
 
@@ -128,7 +137,7 @@ public enum Command {
         throw new NotCommandException("Not valid command.");
     }
 
-    abstract void operation(String args, Store store, Loader loader);
+    abstract public void operation(String args, Store store, Loader loader);
 
     @Override
     public String toString() {

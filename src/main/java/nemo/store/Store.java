@@ -1,3 +1,6 @@
+package nemo.store;
+
+import nemo.task.Task;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -5,32 +8,32 @@ import java.util.Iterator;
 public class Store {
     private ArrayList<Task> store;
 
-    Store() {
+    public Store() {
         this.store = new ArrayList<>();
     }
 
-    Task get(int id) {
+    public Task get(int id) {
         return this.store.get(id);
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         this.store.add(task);
     }
 
-    void remove(int i) {
+    public void remove(int i) {
         this.store.remove(i);
     }
 
-    int size() {
+    public int size() {
         return this.store.size();
     }
 
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
-    Iterator<Task> iterator() {
+    public Iterator<Task> iterator() {
         return store.iterator();
     }
 
-    String generateList() {
+    public String generateList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < store.size(); i++) {
             Task task = store.get(i);
