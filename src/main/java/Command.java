@@ -5,14 +5,14 @@ public enum Command {
     // Solution below adapted from https://stackoverflow.com/a/14968372
     BYE("bye") {
         @Override
-        public void operation(String args) {
-            loader.save();
+        public void operation(String args, Store store, Loader loader) {
+            loader.save(store);
             System.out.println("Bye. Hope to see you again soon!");
         }
     },
     LIST("list") {
         @Override
-        public void operation(String args) {
+        public void operation(String args, Store store, Loader loader) {
             if (store.size() == 0) {
                 System.out.println("Nothing in the list yet.");
                 return;
@@ -23,19 +23,19 @@ public enum Command {
     },
     MARK("mark") {
         @Override
-        public void operation(String args) {
-            changeMark(true, args);
+        public void operation(String args, Store store, Loader loader) {
+            changeMark(args, store, true);
         }
     },
     UNMARK("unmark") {
         @Override
-        public void operation(String args) {
-            changeMark(false, args);
+        public void operation(String args, Store store, Loader loader) {
+            changeMark(args, store, false);
         }
     }, 
     TODO("todo") {
         @Override
-        public void operation(String args) {
+        public void operation(String args, Store store, Loader loader) {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Todo todo = new Todo(argMap);
@@ -51,7 +51,7 @@ public enum Command {
     },
     DEADLINE("deadline") {
         @Override
-        public void operation(String args) {
+        public void operation(String args, Store store, Loader loader) {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Deadline deadline = new Deadline(argMap);
@@ -67,7 +67,7 @@ public enum Command {
     },
     EVENT("event") {
         @Override
-        public void operation(String args) {
+        public void operation(String args, Store store, Loader loader) {
             try {
                 HashMap<String, String> argMap = Task.parseArgs(args);
                 Event event = new Event(argMap);
@@ -83,7 +83,7 @@ public enum Command {
     },
     DELETE("delete") {
         @Override
-        public void operation(String args) {
+        public void operation(String args, Store store, Loader loader) {
             try {
                 Task task = store.get(Integer.parseInt(args) - 1);
                 String taskSummary = task.getSummary();
@@ -100,8 +100,6 @@ public enum Command {
     };
 
     private final String command;
-    private static Store store;
-    private static Loader loader;
     private static HashMap<String, Command> commandMap;
 
     Command(String command) {
@@ -116,14 +114,6 @@ public enum Command {
         }
     }
 
-    public static void assignStore(Store store) {
-        Command.store = store;
-    }
-
-    public static void assignLoader(Loader loader) {
-        Command.loader = loader;
-    }
-
     public static Command fromString(String input) throws NotCommandException {
         if (commandMap.containsKey(input.toLowerCase())) {
             return commandMap.get(input);
@@ -131,14 +121,14 @@ public enum Command {
         throw new NotCommandException("Not valid command.");
     }
 
-    abstract void operation(String args);
+    abstract void operation(String args, Store store, Loader loader);
 
     @Override
     public String toString() {
         return this.command;
     }
 
-    private static void changeMark(boolean mark, String args) {
+    private static void changeMark(String args, Store store, boolean mark) {
         try {
             Task task = store.get(Integer.parseInt(args) - 1);
             if (mark) {

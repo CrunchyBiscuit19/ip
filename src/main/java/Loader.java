@@ -5,16 +5,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Loader {
-    private Store store;
     private Path saveFilePath;
 
-    public Loader(Store store, Path saveFilePath) {
+    public Loader(Path saveFilePath) {
         this.saveFilePath = saveFilePath;
-        this.store = store;
-        load();
     }
 
-    void load() {
+    void load(Store store) {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
             rawTasks = new ArrayList<>(Files.lines(saveFilePath).toList());
@@ -43,7 +40,7 @@ public class Loader {
         }
     }
 
-    void save() {        
+    void save(Store store) {        
         StringBuilder sb = new StringBuilder();
         Iterator<Task> storeIt = store.iterator();
         while (storeIt.hasNext()) {
