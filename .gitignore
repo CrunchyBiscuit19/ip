@@ -13,9 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Class files
+# Everything else
 *.class
-
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 .vscode/settings.json
+*.jar
