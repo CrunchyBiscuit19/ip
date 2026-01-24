@@ -5,3 +5,5 @@ public class NotCommandException extends Exception {
         super(message);
     }
 }
+
+// Dummy comment
