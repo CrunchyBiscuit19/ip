@@ -6,7 +6,8 @@ import nemo.store.Loader;
 import java.util.Scanner;
 
 /**
- * Responsible for displaying messages, reading input, and routing input to the command processor.
+ * Responsible for displaying messages, reading input, and routing input to the
+ * command processor.
  */
 public class Ui {
     private static Scanner scanner = new Scanner(System.in);
@@ -33,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Parse command and arguments, execute command, then print 
+     * Parse command and arguments, execute command, then print
      * surrounding separators and error messages.
      *
      * @param input  the raw input line from the user

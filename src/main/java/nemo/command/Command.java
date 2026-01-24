@@ -23,7 +23,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = true;
@@ -38,7 +38,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = false;
@@ -57,7 +57,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             changeMark(args, store, true);
@@ -70,12 +70,12 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             changeMark(args, store, false);
         }
-    }, 
+    },
     TODO("todo") {
         /**
          * Add a Todo task. Expected arguments are a goal.
@@ -83,7 +83,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = false;
@@ -107,7 +107,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = false;
@@ -118,7 +118,7 @@ public enum Command {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(deadline.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (Exception e) { 
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }
@@ -131,7 +131,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = false;
@@ -155,7 +155,7 @@ public enum Command {
          * @param args   command arguments (later parsed inside command)
          * @param store  the task store to operate on
          * @param loader the loader to save / load the store
-        */
+         */
         @Override
         public void operation(String args, Store store, Loader loader) {
             shouldExit = false;
@@ -205,7 +205,8 @@ public enum Command {
     }
 
     /**
-     * Execute this command with the provided arguments on the given Store and Loader
+     * Execute this command with the provided arguments on the given Store and
+     * Loader
      *
      * @param args   command arguments (later parsed inside command)
      * @param store  the task store to operate on
@@ -223,7 +224,7 @@ public enum Command {
     }
 
     /**
-     * Change the mark status of the task identified by args. 
+     * Change the mark status of the task identified by args.
      * Pwrforms parsing, bounds checking and prints messages.
      *
      * @param args  index (1-based) of the task to change

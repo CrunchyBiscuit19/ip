@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Collection of Task objects. 
+ * Collection of Task objects.
  */
 public class Store {
     private ArrayList<Task> store;

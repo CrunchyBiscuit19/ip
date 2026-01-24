@@ -50,11 +50,11 @@ public class Event extends Task {
     }
 
     /**
-     * Construct an Event from a parsed argument map. 
+     * Construct an Event from a parsed argument map.
      * Keys "mainArg", "from" and "to" should be present.
      *
      * @param argMap map of parsed arguments
-     * @throws ParseException if required keys are missing or blank
+     * @throws ParseException         if required keys are missing or blank
      * @throws DateTimeParseException if datetime parsing fails
      */
     public Event(HashMap<String, String> argMap) throws ParseException, DateTimeParseException {
@@ -76,7 +76,9 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return MessageFormat.format("{0} (from: {1} to: {2})", goal, from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")), to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
+        return MessageFormat.format("{0} (from: {1} to: {2})", goal,
+                from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")),
+                to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
     }
 
     @Override

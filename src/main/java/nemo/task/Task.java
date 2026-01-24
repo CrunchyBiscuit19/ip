@@ -39,7 +39,7 @@ abstract public class Task {
     }
 
     /**
-     * Construct a Task from a parsed argument map. 
+     * Construct a Task from a parsed argument map.
      * Main argument key "mainArg" contains the task goal.
      *
      * @param argMap map of parsed arguments
@@ -55,7 +55,7 @@ abstract public class Task {
 
     /**
      * Parse a raw arguments string into a map of argument keys to values.
-     * Main argument is stored under the "mainArg" key. 
+     * Main argument is stored under the "mainArg" key.
      * All other keys are created when tokens start with '/' are encountered.
      *
      * @param args raw argument string
@@ -87,13 +87,13 @@ abstract public class Task {
 
         return argMap;
     }
-    
+
     /**
      * Return a human-readable description of the task.
      *
      * @return task description string
      */
-    abstract public String getDescription(); 
+    abstract public String getDescription();
 
     /**
      * Return a one-letter icon representing the task type.
@@ -140,7 +140,8 @@ abstract public class Task {
      * 
      * @param rawDateTimeString The raw string to be parsed
      * @return A LocalDateTime that is parsed from the date passed in.
-     * @throws DateTimeParseException when the raw string is not in the expected date time patten.
+     * @throws DateTimeParseException when the raw string is not in the expected
+     *                                date time patten.
      */
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
         // Solution adapted from https://stackoverflow.com/a/22463063
@@ -149,7 +150,9 @@ abstract public class Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
             return LocalDateTime.parse(rawDateTimeString, formatter);
         } catch (DateTimeParseException e) {
-            throw new DateTimeParseException(MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern), pattern, 0);
+            throw new DateTimeParseException(
+                    MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern),
+                    pattern, 0);
         }
     }
 }

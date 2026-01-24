@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 /**
  * Responsible for loading tasks from and saving tasks to a save file.
- * Tasks are serialized as single lines when saving and converted 
+ * Tasks are serialized as single lines when saving and converted
  * back to Task objects when loading.
  */
 public class Loader {
@@ -41,7 +41,7 @@ public class Loader {
             String type = data[0].trim();
             boolean done = data[1].trim().equals("1") ? true : false;
             String goal = data[2].trim();
-            
+
             Task newTask = new Todo("");
             if (type.equals("T")) {
                 newTask = new Todo(goal, done);
@@ -58,12 +58,12 @@ public class Loader {
     }
 
     /**
-     * Save the tasks in the store to the save file. 
+     * Save the tasks in the store to the save file.
      * Save file and directories automatically created if necessary.
      *
      * @param store the store to save the tasks
      */
-    public void save(Store store) {        
+    public void save(Store store) {
         StringBuilder sb = new StringBuilder();
         Iterator<Task> storeIt = store.iterator();
         while (storeIt.hasNext()) {
@@ -80,5 +80,4 @@ public class Loader {
         }
     }
 
-    
 }
