@@ -6,4 +6,4 @@ public class NotCommandException extends Exception {
     }
 }
 
-// Dummy comment1
+// Dummy comment
