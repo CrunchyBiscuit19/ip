@@ -23,10 +23,22 @@ enum EventArg {
     }
 }
 
+/**
+ * Task representing an event that has a start ("from") and end ("to") datetime.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * Construct an Event.
+     *
+     * @param goal description of the event
+     * @param from start datetime string in "dd-MM-yyyy HHmm" format
+     * @param to   end datetime string in "dd-MM-yyyy HHmm" format
+     * @param done initial completion state
+     * @throws DateTimeParseException if either datetime cannot be parsed
+     */
     public Event(String goal, String from, String to, boolean done) throws DateTimeParseException {
         super(goal, done);
         this.from = parseDateTime(from);
@@ -37,6 +49,14 @@ public class Event extends Task {
         this(goal, from, to, false);
     }
 
+    /**
+     * Construct an Event from a parsed argument map. 
+     * Keys "mainArg", "from" and "to" should be present.
+     *
+     * @param argMap map of parsed arguments
+     * @throws ParseException if required keys are missing or blank
+     * @throws DateTimeParseException if datetime parsing fails
+     */
     public Event(HashMap<String, String> argMap) throws ParseException, DateTimeParseException {
         super(argMap);
         if (!argMap.containsKey(EventArg.FROM.toString())) {
@@ -49,6 +69,11 @@ public class Event extends Task {
         this.to = parseDateTime(argMap.get(EventArg.TO.toString()));
     }
 
+    /**
+     * Return a human-readable description including the event's start and end.
+     *
+     * @return formatted description string
+     */
     @Override
     public String getDescription() {
         return MessageFormat.format("{0} (from: {1} to: {2})", goal, from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")), to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
@@ -59,6 +84,11 @@ public class Event extends Task {
         return "E";
     }
 
+    /**
+     * Return a serialized representation for saving to file.
+     *
+     * @return serialized task line
+     */
     @Override
     public String getSerialized() {
         return MessageFormat.format("{0} | {1} | {2} | {3} | {4}", getTypeIcon(), done ? 1 : 0, goal,

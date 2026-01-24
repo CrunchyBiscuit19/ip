@@ -5,6 +5,9 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Collection of Task objects. 
+ */
 public class Store {
     private ArrayList<Task> store;
 
@@ -33,6 +36,11 @@ public class Store {
         return store.iterator();
     }
 
+    /**
+     * Generate nicely formatted list of tasks for printing.
+     *
+     * @return list of task summaries
+     */
     public String generateList() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < store.size(); i++) {

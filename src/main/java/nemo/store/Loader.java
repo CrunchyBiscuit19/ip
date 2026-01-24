@@ -10,6 +10,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Responsible for loading tasks from and saving tasks to a save file.
+ * Tasks are serialized as single lines when saving and converted 
+ * back to Task objects when loading.
+ */
 public class Loader {
     private Path saveFilePath;
 
@@ -17,6 +22,12 @@ public class Loader {
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     * Read tasks from the save file and populate the store.
+     * If save file doesn't exist, print message informing user.
+     *
+     * @param store the store to load tasks into
+     */
     public void load(Store store) {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
@@ -46,6 +57,12 @@ public class Loader {
         }
     }
 
+    /**
+     * Save the tasks in the store to the save file. 
+     * Save file and directories automatically created if necessary.
+     *
+     * @param store the store to save the tasks
+     */
     public void save(Store store) {        
         StringBuilder sb = new StringBuilder();
         Iterator<Task> storeIt = store.iterator();
