@@ -7,7 +7,10 @@ import nemo.task.Todo;
 import nemo.task.Deadline;
 import nemo.task.Event;
 import nemo.exception.NotCommandException;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.text.MessageFormat;
 
 /**
@@ -170,6 +173,37 @@ public enum Command {
                 System.out.println("Not task ID.");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Invalid task ID.");
+            }
+        }
+    },
+    FIND("find") {
+        /**
+         * Find tasks with the given query argument in the description
+         *
+         * @param args   command arguments (later parsed inside command)
+         * @param store  the task store to operate on
+         * @param loader the loader to save / load the store
+         */
+        @Override
+        public void operation(String args, Store store, Loader loader) {
+            shouldExit = false;
+            String query = args;
+            Iterator<Task> storeIt = store.iterator();
+            ArrayList<Task> matchedTasks = new ArrayList<>();
+            while (storeIt.hasNext()) {
+                Task task = storeIt.next();
+                if (task.getDescription().contains(query)) {
+                    matchedTasks.add(task);
+                }
+            }
+            if (matchedTasks.isEmpty()) {
+                System.out.println("No matching tasks found.");
+                return;
+            }
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < matchedTasks.size(); i++) {
+                Task task = matchedTasks.get(i);
+                System.out.println(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
             }
         }
     };
