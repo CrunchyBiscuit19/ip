@@ -43,7 +43,7 @@ public enum Command {
         public void operation(String args, Store store, Loader loader) {
             changeMark(args, store, false);
         }
-    }, 
+    },
     TODO("todo") {
         @Override
         public void operation(String args, Store store, Loader loader) {
@@ -72,7 +72,7 @@ public enum Command {
                 System.out.println("Got it. I've added this task:");
                 System.out.println(deadline.getSummary());
                 System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (Exception e) { 
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return;
             }
