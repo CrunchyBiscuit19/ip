@@ -28,10 +28,10 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = true;
             loader.save(store);
-            System.out.println("Bye. Hope to see you again soon!");
+            return "Bye. Hope to see you again soon!";
         }
     },
     LIST("list") {
@@ -43,14 +43,12 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             if (store.size() == 0) {
-                System.out.println("Nothing in the list yet.");
-                return;
+                return "Nothing in the list yet.";
             }
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(store.generateList());
+            return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
         }
     },
     MARK("mark") {
@@ -62,8 +60,8 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
-            changeMark(args, store, true);
+        public String operation(String args, Store store, Loader loader) throws Exception {
+            return changeMark(args, store, true);
         }
     },
     UNMARK("unmark") {
@@ -75,8 +73,8 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
-            changeMark(args, store, false);
+        public String operation(String args, Store store, Loader loader) throws Exception {
+            return changeMark(args, store, false);
         }
     },
     TODO("todo") {
@@ -88,19 +86,13 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
-            try {
-                HashMap<String, String> argMap = Task.parseArgs(args);
-                Todo todo = new Todo(argMap);
-                store.add(todo);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(todo.getSummary());
-                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            Todo todo = new Todo(argMap);
+            store.add(todo);
+            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+                    todo.getSummary(), store.size());
         }
     },
     DEADLINE("deadline") {
@@ -112,19 +104,13 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
-            try {
-                HashMap<String, String> argMap = Task.parseArgs(args);
-                Deadline deadline = new Deadline(argMap);
-                store.add(deadline);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(deadline.getSummary());
-                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            Deadline deadline = new Deadline(argMap);
+            store.add(deadline);
+            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+                    deadline.getSummary(), store.size());
         }
     },
     EVENT("event") {
@@ -136,19 +122,13 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
-            try {
-                HashMap<String, String> argMap = Task.parseArgs(args);
-                Event event = new Event(argMap);
-                store.add(event);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(event.getSummary());
-                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return;
-            }
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            Event event = new Event(argMap);
+            store.add(event);
+            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+                    event.getSummary(), store.size());
         }
     },
     DELETE("delete") {
@@ -160,19 +140,19 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             try {
                 Task task = store.get(Integer.parseInt(args) - 1);
                 String taskSummary = task.getSummary();
                 store.remove(Integer.parseInt(args) - 1);
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(taskSummary);
-                System.out.println(MessageFormat.format("Now you have {0} tasks in the list.", store.size()));
+                return MessageFormat.format(
+                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n",
+                        taskSummary, store.size());
             } catch (NumberFormatException e) {
-                System.out.println("Not task ID.");
+                throw new NumberFormatException("Not task ID.");
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Invalid task ID.");
+                throw new IndexOutOfBoundsException("Invalid task ID.");
             }
         }
     },
@@ -185,7 +165,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public void operation(String args, Store store, Loader loader) {
+        public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             String query = args;
             Iterator<Task> storeIt = store.iterator();
@@ -197,14 +177,15 @@ public enum Command {
                 }
             }
             if (matchedTasks.isEmpty()) {
-                System.out.println("No matching tasks found.");
-                return;
+                return "No matching tasks found.";
             }
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the matching tasks in your list:");
             for (int i = 0; i < matchedTasks.size(); i++) {
                 Task task = matchedTasks.get(i);
-                System.out.println(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
+                sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
             }
+            return sb.toString();
         }
     };
 
@@ -246,7 +227,7 @@ public enum Command {
      * @param store  the task store to operate on
      * @param loader the loader to save / load the store
      */
-    public abstract void operation(String args, Store store, Loader loader);
+    public abstract String operation(String args, Store store, Loader loader) throws Exception;
 
     @Override
     public String toString() {
@@ -265,22 +246,25 @@ public enum Command {
      * @param store the task store containing tasks
      * @param mark  true to mark as done, false to unmark
      */
-    private static void changeMark(String args, Store store, boolean mark) {
+    private static String changeMark(String args, Store store, boolean mark)
+            throws NumberFormatException, IndexOutOfBoundsException {
         shouldExit = false;
         try {
             Task task = store.get(Integer.parseInt(args) - 1);
+            StringBuilder sb = new StringBuilder();
             if (mark) {
                 task.mark();
-                System.out.println("Nice! I've marked this task as done:");
+                sb.append("Nice! I've marked this task as done:\n");
             } else {
                 task.unmark();
-                System.out.println("OK, I've marked this task as not done yet:");
+                sb.append("OK, I've marked this task as not done yet:\n");
             }
-            System.out.println(task.getSummary());
+            sb.append(task.getSummary());
+            return sb.toString();
         } catch (NumberFormatException e) {
-            System.out.println("Not task ID.");
+            throw new NumberFormatException("Not task ID.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid task ID.");
+            throw new IndexOutOfBoundsException("Invalid task ID.");
         }
     }
 }

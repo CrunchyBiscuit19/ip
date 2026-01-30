@@ -11,7 +11,7 @@ import nemo.gui.Gui;
  */
 public class Nemo {
     public static void main(String[] args1) {
-        Path saveFilePath = Paths.get(System.getProperty("user.dir")).resolve("NEMO").resolve("data.txt");
+        Path saveFilePath = Paths.get(System.getProperty("user.home")).resolve("NEMO").resolve("data.txt");
         Application.launch(Gui.class, saveFilePath.toString());
     }
 }

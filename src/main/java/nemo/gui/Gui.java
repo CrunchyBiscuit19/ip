@@ -1,5 +1,6 @@
 package nemo.gui;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import javafx.application.Application;
@@ -102,9 +103,9 @@ public class Gui extends Application {
         // available
         String nemoText = "Placeholder";
         try {
-            Command.fromString(commandStr).operation(args, store, loader);
+            nemoText = Command.fromString(commandStr).operation(args, store, loader);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            nemoText = MessageFormat.format("ERROR | {0}", e.getMessage());
         }
 
         dialogContainer.getChildren().addAll(
