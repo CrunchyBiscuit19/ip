@@ -3,6 +3,7 @@ package nemo.store;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,6 +22,10 @@ public class Loader {
 
     public Loader(Path saveFilePath) {
         this.saveFilePath = saveFilePath;
+    }
+
+    public Loader(String saveFilePath) {
+        this.saveFilePath = Paths.get(saveFilePath);
     }
 
     /**
