@@ -1,9 +1,10 @@
 package nemo.ui;
 
-import nemo.command.Command;
-import nemo.store.Store;
-import nemo.store.Loader;
 import java.util.Scanner;
+
+import nemo.command.Command;
+import nemo.store.Loader;
+import nemo.store.Store;
 
 /**
  * Responsible for displaying messages, reading input, and routing input to the
@@ -16,10 +17,10 @@ public class Ui {
      * Print the application welcome banner to standard output.
      */
     public static void showWelcomeMessage() {
-        System.out.println("____________________________________________________________\r\n" +
-                " Hello! I'm Nemo!\r\n" +
-                " What can I do for you?\r\n" +
-                "____________________________________________________________");
+        System.out.println("____________________________________________________________\r\n"
+                + " Hello! I'm Nemo!\r\n"
+                + " What can I do for you?\r\n"
+                + "____________________________________________________________");
     }
 
     /**

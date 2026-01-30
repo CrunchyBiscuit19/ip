@@ -1,15 +1,16 @@
-package nemo.task;  
+package nemo.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
 import java.text.ParseException;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void eventConstructorTest(){
+    public void eventConstructorTest() {
         HashMap<String, String> dummyArgs = new HashMap<>();
         dummyArgs.put("mainArg", "test");
         try {
@@ -31,7 +32,7 @@ public class EventTest {
         } catch (DateTimeParseException e) {
             assertEquals(e.getMessage(), "a is not a valid date for format dd-MM-yyyy HHmm.");
         } catch (ParseException e) {
-
+            assertEquals(e.getMessage().contains("is not a valid date for format"), true);
         }
 
         dummyArgs.put("from", "01-01-2026 0000");
@@ -39,6 +40,7 @@ public class EventTest {
         try {
             new Event(dummyArgs);
         } catch (Exception e) {
+            assertEquals(true, false); // Should never happen
         }
     }
 }

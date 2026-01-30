@@ -4,6 +4,9 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 
+/**
+ * Task representing a Todo with a goal and a completion status
+ */
 public class Todo extends Task {
     public Todo(String goal, boolean done) {
         super(goal, done);

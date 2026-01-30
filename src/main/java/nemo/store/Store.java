@@ -1,9 +1,10 @@
 package nemo.store;
 
-import nemo.task.Task;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import nemo.task.Task;
 
 /**
  * Collection of Task objects.
