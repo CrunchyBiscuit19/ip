@@ -2,7 +2,9 @@ package nemo;
 
 import java.nio.file.Path;
 
+import javafx.application.Application;
 import nemo.command.Command;
+import nemo.gui.Gui;
 import nemo.store.Loader;
 import nemo.store.Store;
 import nemo.ui.Ui;
@@ -32,6 +34,7 @@ public class Nemo {
      * Cleanup when command loop is exited.
      */
     public void run() {
+
         Ui.showWelcomeMessage();
 
         while (!Command.isExit()) {
@@ -43,6 +46,7 @@ public class Nemo {
     }
 
     public static void main(String[] args1) {
+        Application.launch(Gui.class, args1);
         new Nemo(Path.of(System.getProperty("user.home"), "NEMO", "data.txt")).run();
     }
 }
