@@ -25,10 +25,16 @@ enum TaskArg {
 /**
  * Abstract base class representing a general task with a goal and status.
  */
-abstract public class Task {
+public abstract class Task {
     protected boolean done;
     protected String goal;
 
+    /**
+     * Construct a task with a goal.
+     *
+     * @param goal description of the task
+     * @param done initial completion state
+     */
     public Task(String goal, boolean done) {
         this.goal = goal;
         this.done = done;
@@ -93,21 +99,21 @@ abstract public class Task {
      *
      * @return task description string
      */
-    abstract public String getDescription();
+    public abstract String getDescription();
 
     /**
      * Return a one-letter icon representing the task type.
      *
      * @return task type icon
      */
-    abstract public String getTypeIcon();
+    public abstract String getTypeIcon();
 
     /**
      * Return a serialized representation of the task.
      *
      * @return serialized task string
      */
-    abstract public String getSerialized();
+    public abstract String getSerialized();
 
     public String getStatusIcon() {
         return (done ? "X" : " "); // mark done task with X
@@ -137,7 +143,7 @@ abstract public class Task {
 
     /**
      * Parse a string into a LocalDateTime format.
-     * 
+     *
      * @param rawDateTimeString The raw string to be parsed
      * @return A LocalDateTime that is parsed from the date passed in.
      * @throws DateTimeParseException when the raw string is not in the expected

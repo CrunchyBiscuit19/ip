@@ -1,17 +1,17 @@
 package nemo.command;
 
-import nemo.store.Store;
-import nemo.store.Loader;
-import nemo.task.Task;
-import nemo.task.Todo;
-import nemo.task.Deadline;
-import nemo.task.Event;
-import nemo.exception.NotCommandException;
-
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.text.MessageFormat;
+
+import nemo.exception.NotCommandException;
+import nemo.store.Loader;
+import nemo.store.Store;
+import nemo.task.Deadline;
+import nemo.task.Event;
+import nemo.task.Task;
+import nemo.task.Todo;
 
 /**
  * Enum representing all supported user commands and their associated operations
@@ -208,9 +208,9 @@ public enum Command {
         }
     };
 
-    private final String command;
     private static HashMap<String, Command> commandMap;
     private static boolean shouldExit;
+    private final String command;
 
     Command(String command) {
         this.command = command;
@@ -246,7 +246,7 @@ public enum Command {
      * @param store  the task store to operate on
      * @param loader the loader to save / load the store
      */
-    abstract public void operation(String args, Store store, Loader loader);
+    public abstract void operation(String args, Store store, Loader loader);
 
     @Override
     public String toString() {
