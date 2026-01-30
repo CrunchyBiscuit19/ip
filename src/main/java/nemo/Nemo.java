@@ -47,6 +47,5 @@ public class Nemo {
 
     public static void main(String[] args1) {
         Application.launch(Gui.class, args1);
-        new Nemo(Path.of(System.getProperty("user.home"), "NEMO", "data.txt")).run();
     }
 }
