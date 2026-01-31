@@ -24,6 +24,12 @@ public class Store {
         this.store.add(task);
     }
 
+    public void add(Task... tasks) {
+        for (int i = 0; i < tasks.length; i++) {
+            this.store.add(tasks[i]);
+        }
+    }
+
     public void remove(int i) {
         this.store.remove(i);
     }
