@@ -3,6 +3,7 @@ package nemo.store;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,18 +24,22 @@ public class Loader {
         this.saveFilePath = saveFilePath;
     }
 
+    public Loader(String saveFilePath) {
+        this.saveFilePath = Paths.get(saveFilePath);
+    }
+
     /**
      * Read tasks from the save file and populate the store.
      * If save file doesn't exist, print message informing user.
      *
      * @param store the store to load tasks into
      */
-    public void load(Store store) {
+    public void load(Store store) throws IOException {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
             rawTasks = new ArrayList<>(Files.lines(saveFilePath).toList());
         } catch (IOException e) {
-            System.out.println("Save file does not exist. Create tasks and save them to create one.");
+            throw new IOException("Save file does not exist. Create tasks and save them to create one.");
         }
 
         for (String rawTask : rawTasks) {
@@ -64,7 +69,7 @@ public class Loader {
      *
      * @param store the store to save the tasks
      */
-    public void save(Store store) {
+    public void save(Store store) throws Exception {
         StringBuilder sb = new StringBuilder();
         Iterator<Task> storeIt = store.iterator();
         while (storeIt.hasNext()) {
@@ -77,7 +82,7 @@ public class Loader {
             Files.createDirectories(saveFilePath.getParent());
             Files.writeString(saveFilePath, sb.toString().trim());
         } catch (Exception e) {
-            System.out.println("Something went wrong while saving your file.");
+            throw new IOException("Something went wrong while saving your file.");
         }
     }
 
