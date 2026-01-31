@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import nemo.command.Command;
 import nemo.store.Loader;
@@ -20,6 +21,8 @@ public class Controller extends AnchorPane {
     private Store store;
     private Loader loader;
 
+    @FXML
+    private HBox notificationBar;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -64,7 +67,7 @@ public class Controller extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.createUserDialog(input, userImage),
-                DialogBox.createDukeDialog(nemoText, nemoImage));
+                DialogBox.createNemoDialog(nemoText, nemoImage));
         userInput.clear();
     }
 }

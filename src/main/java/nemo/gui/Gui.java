@@ -15,6 +15,9 @@ import nemo.store.Store;
  * Responsible for running GUI above Nemo.
  */
 public class Gui extends Application {
+    private static int MIN_HEIGHT = 220;
+    private static int MIN_WIDTH = 417;
+
     @Override
     public void start(Stage stage) {
         List<String> args = getParameters().getRaw();
@@ -27,6 +30,8 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setMinHeight(MIN_HEIGHT);
+            stage.setMinWidth(MIN_WIDTH);
             fxmlLoader.<Controller>getController().setStoreLoader(store, loader);
             stage.show();
         } catch (IOException e) {

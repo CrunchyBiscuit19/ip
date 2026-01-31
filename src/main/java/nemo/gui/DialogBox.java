@@ -2,6 +2,7 @@ package nemo.gui;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's
@@ -22,13 +26,16 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private StackPane displayPictureWrapper;
+    @FXML
     private ImageView displayPicture;
 
     /**
      * Creates a dialog box representing the user and their input
      *
-     * @param text  name of the dialog box
-     * @param image profile image of dialog box
+     * @param player name of the agent
+     * @param text   dialog text
+     * @param image  profile image of dialog box
      */
     private DialogBox(String text, Image image) {
         try {
@@ -39,6 +46,13 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Rectangle clip = new Rectangle();
+        clip.setArcWidth(32);
+        clip.setArcHeight(32);
+        clip.widthProperty().bind(displayPictureWrapper.widthProperty());
+        clip.heightProperty().bind(displayPictureWrapper.heightProperty());
+        displayPictureWrapper.setClip(clip);
 
         dialog.setText(text);
         displayPicture.setImage(image);
@@ -73,7 +87,7 @@ public class DialogBox extends HBox {
      * @param image the profile image of nemo
      * @return dialog box of nemo
      */
-    public static DialogBox createDukeDialog(String text, Image image) {
+    public static DialogBox createNemoDialog(String text, Image image) {
         var db = new DialogBox(text, image);
         db.flip();
         return db;
