@@ -30,7 +30,6 @@ public enum Command {
         @Override
         public String operation(String args, Store store, Loader loader) throws Exception {
             shouldExit = true;
-            loader.save(store);
             return "Bye. Hope to see you again soon!";
         }
     },

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -8,34 +9,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-    minHeight="-Infinity" minWidth="-Infinity"
-    prefHeight="600.0" prefWidth="400.0"
-    xmlns="http://javafx.com/javafx/17"
-    xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="nemo.gui.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nemo.gui.Controller">
     <children>
-        <HBox fx:id="notificationBar"
-            style="-fx-background-color: red"
-            AnchorPane.topAnchor="0.0"
-            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-            <Label fx:id="notificationLabel" text="This is a notification" />
-            <Button text="Dismiss" />
-        </HBox>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#processInput" prefHeight="41.0"
-            prefWidth="324.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0"
-            AnchorPane.rightAnchor="76.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false"
-            onAction="#processInput" prefHeight="41.0" prefWidth="76.0" text="Send"
-            AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0"
-            prefHeight="557.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="43.0"
-            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#processInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="76.0" />
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#processInput" prefHeight="41.0" prefWidth="76.0" text="Send" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer"
-                    prefHeight="552.0"
-                    prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
             </content>
         </ScrollPane>
+        <HBox fx:id="notificationBar" alignment="TOP_RIGHT" style="-fx-background-color: #E0777C; -fx-padding: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label fx:id="notificationLabel" alignment="CENTER" text="Placeholder notification" textAlignment="RIGHT" />
+            <Button fx:id="notificationButton" alignment="CENTER" contentDisplay="RIGHT" onAction="#dismissNotification" text="X">
+            <HBox.margin>
+               <Insets left="10.0" />
+            </HBox.margin></Button>
+        </HBox>
     </children>
 </AnchorPane>

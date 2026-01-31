@@ -2,7 +2,6 @@ package nemo.gui;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's

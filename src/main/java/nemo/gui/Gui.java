@@ -23,7 +23,6 @@ public class Gui extends Application {
         List<String> args = getParameters().getRaw();
         Store store = new Store();
         Loader loader = new Loader(args.get(0));
-        loader.load(store);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/Controller.fxml"));
