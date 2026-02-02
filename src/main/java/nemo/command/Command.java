@@ -146,8 +146,8 @@ public enum Command {
                 String taskSummary = task.getSummary();
                 store.remove(Integer.parseInt(args) - 1);
                 return MessageFormat.format(
-                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n",
-                        taskSummary, store.size());
+                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n", taskSummary,
+                        store.size());
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Not task ID.");
             } catch (IndexOutOfBoundsException e) {
@@ -167,25 +167,11 @@ public enum Command {
         public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             String query = args;
-            Iterator<Task> storeIt = store.getIterator();
-            ArrayList<Task> matchedTasks = new ArrayList<>();
-            while (storeIt.hasNext()) {
-                Task task = storeIt.next();
-                if (task.getDescription().contains(query)) {
-                    matchedTasks.add(task);
-                }
-            }
+            ArrayList<Task> matchedTasks = store.findTasks(query);
             if (matchedTasks.isEmpty()) {
                 return "No matching tasks found.";
             }
-            StringBuilder sb = new StringBuilder();
-            sb.append("Here are the matching tasks in your list:");
-            for (int i = 0; i < matchedTasks.size(); i++) {
-                Task task = matchedTasks.get(i);
-                String threeDigitIndex = String.format("%03d", i + 1);
-                sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
-            }
-            return sb.toString();
+            return Store.generateListFormattedTasks(matchedTasks);
         }
     };
 

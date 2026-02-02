@@ -53,14 +53,42 @@ public class Store {
     }
 
     /**
-     * Generate nicely formatted list of tasks for printing.
+     * Generate nicely formatted list of all tasks for printing.
      *
      * @return list of task summaries
      */
     public String generateList() {
+        return generateListFormattedTasks(tasks);
+    }
+
+    /**
+     * Find tasks whioh contain the query line
+     *
+     * @param query string to match tasks against
+     * @return The list of tasks which matched the query
+     */
+    public String findTasks(String query) {
+        Iterator<Task> tasksIt = tasks.getIterator();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        while (taskIt.hasNext()) {
+            Task task = taskIt.next();
+            if (task.getDescription().contains(query)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
+    }
+
+    /**
+     * Generate nicely formatted list of certain tasks for printing.
+     *
+     * @param tasksList List to iterate through
+     * @return list of task summaries
+     */
+    public static String generateListFormattedTasks(ArrayList<Task> tasksList) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < tasksList.size(); i++) {
+            Task task = tasksList.get(i);
             String threeDigitIndex = String.format("%03d", i + 1);
             sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
         }
