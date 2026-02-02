@@ -24,6 +24,11 @@ public class Store {
         this.tasks.add(task);
     }
 
+    /**
+     * Add multiple to tasks to the store at the same time
+     *
+     * @param tasks Var args of tasks
+     */
     public void add(Task... tasks) {
         for (int i = 0; i < tasks.length; i++) {
             this.tasks.add(tasks[i]);
