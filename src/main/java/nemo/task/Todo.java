@@ -8,6 +8,8 @@ import java.util.HashMap;
  * Task representing a Todo with a goal and a completion status
  */
 public class Todo extends Task {
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2}";
+
     public Todo(String goal, boolean done) {
         super(goal, done);
     }
@@ -32,6 +34,6 @@ public class Todo extends Task {
 
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2}", getTypeIcon(), isDone ? 1 : 0, goal);
+        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal);
     }
 }

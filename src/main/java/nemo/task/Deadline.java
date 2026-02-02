@@ -26,6 +26,7 @@ enum DeadlineArg {
  */
 public class Deadline extends Task {
     private LocalDateTime by;
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3}";
 
     /**
      * Construct a Deadline with goal and by datetime.
@@ -83,7 +84,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2} | {3}", getTypeIcon(), isDone ? 1 : 0, goal,
+        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
                 dateTimeToString(by));
     }
 }

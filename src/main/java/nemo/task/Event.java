@@ -28,6 +28,7 @@ enum EventArg {
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
 
     /**
      * Construct an Event.
@@ -94,7 +95,7 @@ public class Event extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2} | {3} | {4}", getTypeIcon(), isDone ? 1 : 0, goal,
+        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
                 dateTimeToString(from),
                 dateTimeToString(to));
     }
