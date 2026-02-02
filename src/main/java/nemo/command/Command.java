@@ -28,7 +28,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = true;
             return "Bye. Hope to see you again soon!";
         }
@@ -42,7 +42,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             if (store.size() == 0) {
                 return "Nothing in the list yet.";
@@ -59,7 +59,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             return changeMark(args, store, true);
         }
     },
@@ -72,7 +72,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             return changeMark(args, store, false);
         }
     },
@@ -85,7 +85,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Todo todo = new Todo(argMap);
@@ -103,7 +103,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Deadline deadline = new Deadline(argMap);
@@ -121,7 +121,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Event event = new Event(argMap);
@@ -139,7 +139,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             try {
                 Task task = store.get(Integer.parseInt(args) - 1);
@@ -164,10 +164,10 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             String query = args;
-            Iterator<Task> storeIt = store.iterator();
+            Iterator<Task> storeIt = store.getIterator();
             ArrayList<Task> matchedTasks = new ArrayList<>();
             while (storeIt.hasNext()) {
                 Task task = storeIt.next();
@@ -226,7 +226,7 @@ public enum Command {
      * @param store  the task store to operate on
      * @param loader the loader to save / load the store
      */
-    public abstract String operation(String args, Store store, Loader loader) throws Exception;
+    public abstract String operate(String args, Store store, Loader loader) throws Exception;
 
     @Override
     public String toString() {

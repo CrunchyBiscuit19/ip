@@ -32,6 +32,6 @@ public class Todo extends Task {
 
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2}", getTypeIcon(), done ? 1 : 0, goal);
+        return MessageFormat.format("{0} | {1} | {2}", getTypeIcon(), isDone ? 1 : 0, goal);
     }
 }

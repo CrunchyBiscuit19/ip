@@ -84,7 +84,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2} | {3}", getTypeIcon(), done ? 1 : 0, goal,
+        return MessageFormat.format("{0} | {1} | {2} | {3}", getTypeIcon(), isDone ? 1 : 0, goal,
                 by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
     }
 }

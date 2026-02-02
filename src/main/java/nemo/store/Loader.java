@@ -74,7 +74,7 @@ public class Loader {
      */
     public void save(Store store) throws Exception {
         StringBuilder sb = new StringBuilder();
-        Iterator<Task> storeIt = store.iterator();
+        Iterator<Task> storeIt = store.getIterator();
         while (storeIt.hasNext()) {
             Task task = storeIt.next();
             sb.append(task.getSerialized());

@@ -24,8 +24,6 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private StackPane displayPictureWrapper;
-    @FXML
     private ImageView displayPicture;
 
     /**
@@ -44,13 +42,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Rectangle clip = new Rectangle();
-        clip.setArcWidth(32);
-        clip.setArcHeight(32);
-        clip.widthProperty().bind(displayPictureWrapper.widthProperty());
-        clip.heightProperty().bind(displayPictureWrapper.heightProperty());
-        displayPictureWrapper.setClip(clip);
 
         dialog.setText(text);
         displayPicture.setImage(image);

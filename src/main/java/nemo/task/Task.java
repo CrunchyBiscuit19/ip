@@ -26,7 +26,7 @@ enum TaskArg {
  * Abstract base class representing a general task with a goal and status.
  */
 public abstract class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String goal;
 
     /**
@@ -37,7 +37,7 @@ public abstract class Task {
      */
     public Task(String goal, boolean done) {
         this.goal = goal;
-        this.done = done;
+        this.isDone = done;
     }
 
     public Task(String goal) {
@@ -57,7 +57,7 @@ public abstract class Task {
         }
         assert (argMap.containsKey(TaskArg.MAINARG.toString()));
         this.goal = argMap.get(TaskArg.MAINARG.toString());
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract class Task {
     public abstract String getSerialized();
 
     public String getStatusIcon() {
-        return (done ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
@@ -130,11 +130,11 @@ public abstract class Task {
     }
 
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     public void unmark() {
-        done = false;
+        isDone = false;
     }
 
     @Override

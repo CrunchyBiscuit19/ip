@@ -103,7 +103,7 @@ public class Controller extends AnchorPane {
         // available
         String nemoText = "Placeholder";
         try {
-            nemoText = Command.fromString(commandStr).operation(args, store, loader);
+            nemoText = Command.fromString(commandStr).operate(args, store, loader);
         } catch (Exception e) {
             nemoText = MessageFormat.format("ERROR | {0}", e.getMessage());
         }

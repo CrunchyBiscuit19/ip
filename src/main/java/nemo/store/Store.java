@@ -10,37 +10,37 @@ import nemo.task.Task;
  * Collection of Task objects.
  */
 public class Store {
-    private ArrayList<Task> store;
+    private ArrayList<Task> tasks;
 
     public Store() {
-        this.store = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public Task get(int id) {
-        return this.store.get(id);
+        return this.tasks.get(id);
     }
 
     public void add(Task task) {
-        this.store.add(task);
+        this.tasks.add(task);
     }
 
     public void add(Task... tasks) {
         for (int i = 0; i < tasks.length; i++) {
-            this.store.add(tasks[i]);
+            this.tasks.add(tasks[i]);
         }
     }
 
     public void remove(int i) {
-        this.store.remove(i);
+        this.tasks.remove(i);
     }
 
     public int size() {
-        return this.store.size();
+        return this.tasks.size();
     }
 
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
-    public Iterator<Task> iterator() {
-        return store.iterator();
+    public Iterator<Task> getIterator() {
+        return tasks.iterator();
     }
 
     /**
@@ -50,8 +50,8 @@ public class Store {
      */
     public String generateList() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < store.size(); i++) {
-            Task task = store.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
         }
         return sb.toString().trim();
