@@ -34,7 +34,7 @@ public class Loader {
      *
      * @param store the store to load tasks into
      */
-    public void load(Store store) throws IOException {
+    public void load(Store store) throws IOException, IllegalArgumentException {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
             rawTasks = new ArrayList<>(Files.lines(saveFilePath).toList());
@@ -44,24 +44,44 @@ public class Loader {
 
         for (String rawTask : rawTasks) {
             String[] data = rawTask.split("\\|");
-            assert (data.length >= 3);
+
+            if (data.length < 3) {
+                throw new IllegalArgumentException(MessageFormat.format("Invalid task format: {0}", rawTask));
+            }
+
             String type = data[0].trim();
-            boolean isDone = data[1].trim().equals("1") ? true : false;
+            boolean isDone = data[1].trim().equals("1");
             String goal = data[2].trim();
 
-            Task newTask = new Todo("");
-            if (type.equals("T")) {
-                newTask = new Todo(goal, isDone);
-            } else if (type.equals("D")) {
-                assert (data.length >= 4);
-                String by = data[3].trim();
-                newTask = new Deadline(goal, by, isDone);
-            } else if (type.equals("E")) {
-                assert (data.length >= 5);
-                String from = data[3].trim();
-                String to = data[4].trim();
-                newTask = new Event(goal, from, to, isDone);
+            Task newTask;
+
+            switch (type) {
+                case "T":
+                    newTask = new Todo(goal, isDone);
+                    break;
+
+                case "D":
+                    if (data.length < 4) {
+                        throw new IllegalArgumentException(
+                                MessageFormat.format("Invalid deadline format: {0}", rawTask));
+                    }
+                    String byRawDate = data[3].trim();
+                    newTask = new Deadline(goal, byRawDate, isDone);
+                    break;
+
+                case "E":
+                    if (data.length < 5) {
+                        throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
+                    }
+                    String fromRawDate = data[3].trim();
+                    String toRawDate = data[4].trim();
+                    newTask = new Event(goal, fromRawDate, toRawDate, isDone);
+                    break;
+
+                default:
+                    throw new IllegalArgumentException(MessageFormat.format("Unknown task type: {0}", rawTask));
             }
+
             store.add(newTask);
         }
     }
