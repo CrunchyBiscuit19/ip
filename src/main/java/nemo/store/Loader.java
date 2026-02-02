@@ -46,21 +46,21 @@ public class Loader {
             String[] data = rawTask.split("\\|");
             assert (data.length >= 3);
             String type = data[0].trim();
-            boolean done = data[1].trim().equals("1") ? true : false;
+            boolean isDone = data[1].trim().equals("1") ? true : false;
             String goal = data[2].trim();
 
             Task newTask = new Todo("");
             if (type.equals("T")) {
-                newTask = new Todo(goal, done);
+                newTask = new Todo(goal, isDone);
             } else if (type.equals("D")) {
                 assert (data.length >= 4);
                 String by = data[3].trim();
-                newTask = new Deadline(goal, by, done);
+                newTask = new Deadline(goal, by, isDone);
             } else if (type.equals("E")) {
                 assert (data.length >= 5);
                 String from = data[3].trim();
                 String to = data[4].trim();
-                newTask = new Event(goal, from, to, done);
+                newTask = new Event(goal, from, to, isDone);
             }
             store.add(newTask);
         }

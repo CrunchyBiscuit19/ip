@@ -101,7 +101,7 @@ public class Controller extends AnchorPane {
         String commandStr = splitInput[0]; // Get command
         String args = splitInput.length >= 2 ? splitInput[1] : ""; // Get rest of argument, or empty string if not
         // available
-        String nemoText = "Placeholder";
+        String nemoText = "";
         try {
             nemoText = Command.fromString(commandStr).operate(args, store, loader);
         } catch (Exception e) {

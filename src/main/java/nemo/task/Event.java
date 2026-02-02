@@ -79,8 +79,8 @@ public class Event extends Task {
     @Override
     public String getDescription() {
         return MessageFormat.format("{0} (from: {1} to: {2})", goal,
-                from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")),
-                to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
+                dateTimeToString(from),
+                dateTimeToString(to));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Event extends Task {
     @Override
     public String getSerialized() {
         return MessageFormat.format("{0} | {1} | {2} | {3} | {4}", getTypeIcon(), isDone ? 1 : 0, goal,
-                from.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")),
-                to.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+                dateTimeToString(from),
+                dateTimeToString(to));
     }
 }

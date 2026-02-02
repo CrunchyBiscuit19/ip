@@ -38,6 +38,10 @@ public class Store {
         return this.tasks.size();
     }
 
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
+
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
     public Iterator<Task> getIterator() {
         return tasks.iterator();
@@ -52,7 +56,8 @@ public class Store {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
+            String threeDigitIndex = String.format("%03d", i + 1);
+            sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
         }
         return sb.toString().trim();
     }

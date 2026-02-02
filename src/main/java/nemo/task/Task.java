@@ -28,6 +28,7 @@ enum TaskArg {
 public abstract class Task {
     protected boolean isDone;
     protected String goal;
+    protected static String dateTimePattern = "dd-MM-yyyy HHmm";
 
     /**
      * Construct a task with a goal.
@@ -152,14 +153,17 @@ public abstract class Task {
      */
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
         // Solution adapted from https://stackoverflow.com/a/22463063
-        String pattern = "dd-MM-yyyy HHmm";
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimePattern);
             return LocalDateTime.parse(rawDateTimeString, formatter);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException(
-                    MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern),
-                    pattern, 0);
+                    MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, dateTimePattern),
+                    dateTimePattern, 0);
         }
+    }
+
+    protected static String dateTimeToString(LocalDateTime datetime) {
+        return datetime.format(DateTimeFormatter.ofPattern(dateTimePattern));
     }
 }

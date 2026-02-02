@@ -44,7 +44,7 @@ public enum Command {
         @Override
         public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
-            if (store.size() == 0) {
+            if (store.isEmpty()) {
                 return "Nothing in the list yet.";
             }
             return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
@@ -182,7 +182,8 @@ public enum Command {
             sb.append("Here are the matching tasks in your list:");
             for (int i = 0; i < matchedTasks.size(); i++) {
                 Task task = matchedTasks.get(i);
-                sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
+                String threeDigitIndex = String.format("%03d", i + 1);
+                sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
             }
             return sb.toString();
         }
