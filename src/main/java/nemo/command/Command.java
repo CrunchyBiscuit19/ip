@@ -3,7 +3,6 @@ package nemo.command;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import nemo.exception.NotCommandException;
 import nemo.store.Loader;

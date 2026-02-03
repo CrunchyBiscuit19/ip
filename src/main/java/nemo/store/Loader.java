@@ -33,7 +33,8 @@ public class Loader {
      * Read tasks from the save file and populate the store.
      * If save file doesn't exist, print message informing user.
      *
-     * @param store the store to load tasks into
+     * @param store
+     *            the store to load tasks into
      */
     public void load(Store store) throws IOException, IllegalArgumentException {
         ArrayList<String> rawTasks = new ArrayList<>();
@@ -57,41 +58,43 @@ public class Loader {
             Task newTask;
 
             switch (type) {
-                case "T":
-                    newTask = new Todo(goal, isDone);
-                    break;
+            case "T":
+                newTask = new Todo(goal, isDone);
+                break;
 
-                case "D":
-                    if (data.length < 4) {
-                        throw new IllegalArgumentException(
-                                MessageFormat.format("Invalid deadline format: {0}", rawTask));
-                    }
-                    String byRawDate = data[3].trim();
-                    newTask = new Deadline(goal, byRawDate, isDone);
-                    break;
+            case "D":
+                if (data.length < 4) {
+                    throw new IllegalArgumentException(
+                            MessageFormat.format("Invalid deadline format: {0}", rawTask));
+                }
+                String byRawDate = data[3].trim();
+                newTask = new Deadline(goal, byRawDate, isDone);
+                break;
 
-                case "E":
-                    if (data.length < 5) {
-                        throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
-                    }
-                    String fromRawDate = data[3].trim();
-                    String toRawDate = data[4].trim();
-                    newTask = new Event(goal, fromRawDate, toRawDate, isDone);
-                    break;
+            case "E":
+                if (data.length < 5) {
+                    throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
+                }
+                String fromRawDate = data[3].trim();
+                String toRawDate = data[4].trim();
+                newTask = new Event(goal, fromRawDate, toRawDate, isDone);
+                break;
 
-                default:
-                    throw new IllegalArgumentException(MessageFormat.format("Unknown task type: {0}", rawTask));
+            default:
+                throw new IllegalArgumentException(MessageFormat.format("Unknown task type: {0}", rawTask));
             }
 
             store.add(newTask);
         }
+
     }
 
     /**
      * Save the tasks in the store to the save file.
      * Save file and directories automatically created if necessary.
      *
-     * @param store the store to save the tasks
+     * @param store
+     *            the store to save the tasks
      */
     public void save(Store store) throws Exception {
         StringBuilder sb = new StringBuilder();

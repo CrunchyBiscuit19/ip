@@ -26,9 +26,9 @@ enum EventArg {
  * Task representing an event that has a start ("from") and end ("to") datetime.
  */
 public class Event extends Task {
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
     private LocalDateTime from;
     private LocalDateTime to;
-    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
 
     /**
      * Construct an Event.

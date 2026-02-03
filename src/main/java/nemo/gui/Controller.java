@@ -113,19 +113,17 @@ public class Controller extends AnchorPane {
                 DialogBox.createNemoDialog(nemoText, nemoImage));
         userInput.clear();
 
-        if (!Command.isExit()) {
-            return;
-        }
-
-        try {
-            loader.save(store);
-        } catch (Exception e) {
-            showNotification(e.getMessage());
-        } finally {
-            // Solution adapted from https://stackoverflow.com/a/30543838
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
+        if (Command.isExit()) {
+            try {
+                loader.save(store);
+            } catch (Exception e) {
+                showNotification(e.getMessage());
+            } finally {
+                // Solution adapted from https://stackoverflow.com/a/30543838
+                PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
+            }
         }
     }
 }

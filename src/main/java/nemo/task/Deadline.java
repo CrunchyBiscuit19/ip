@@ -25,8 +25,8 @@ enum DeadlineArg {
  * Task representing a deadline with a single due datetime.
  */
 public class Deadline extends Task {
-    private LocalDateTime by;
     private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3}";
+    private LocalDateTime by;
 
     /**
      * Construct a Deadline with goal and by datetime.
