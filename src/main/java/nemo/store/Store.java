@@ -3,6 +3,8 @@ package nemo.store;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import nemo.task.Task;
 
@@ -27,7 +29,8 @@ public class Store {
     /**
      * Add multiple to tasks to the store at the same time
      *
-     * @param tasks Var args of tasks
+     * @param tasks
+     *            Var args of tasks
      */
     public void add(Task... tasks) {
         for (int i = 0; i < tasks.length; i++) {
@@ -64,7 +67,8 @@ public class Store {
     /**
      * Find tasks whioh contain the query line
      *
-     * @param query string to match tasks against
+     * @param query
+     *            string to match tasks against
      * @return The list of tasks which matched the query
      */
     public ArrayList<Task> findTasks(String query) {
@@ -82,16 +86,18 @@ public class Store {
     /**
      * Generate nicely formatted list of certain tasks for printing.
      *
-     * @param tasksList List to iterate through
+     * @param tasksList
+     *            List to iterate through
      * @return list of task summaries
      */
     public static String generateListFormattedTasks(ArrayList<Task> tasksList) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tasksList.size(); i++) {
-            Task task = tasksList.get(i);
-            String threeDigitIndex = String.format("%03d", i + 1);
-            sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
-        }
-        return sb.toString().trim();
+        return IntStream.range(0, tasksList.size())
+                .mapToObj(i -> {
+                    Task task = tasksList.get(i);
+                    String threeDigitIndex = String.format("%03d", i + 1);
+                    return MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary());
+                })
+                .collect(Collectors.joining())
+                .trim();
     }
 }
