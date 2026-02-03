@@ -2,6 +2,9 @@ wrong
 list
 todo
 todo read book
+todo read book /priority 1
+todo read book /priority a
+todo read book /priority LoW
 list
 deadline
 deadline return book
@@ -15,7 +18,9 @@ deadline return book /by 06-32-2010
 deadline return book /by 13-32-2010
 deadline return book /by 06-06-2010 2430
 deadline return book /by 06-06-2010 1760
-deadline return book /by 06-06-2010 1730
+deadline return book /priority MEd
+deadline return book /priority MEd /by 06-06-2010 1760
+deadline return book /priority MEd /by 06-06-2010 1730
 list
 event project meeting
 event project meeting /from Aug 6th 2pm
@@ -24,11 +29,13 @@ event project meeting / from Aug 6th 2pm /to 4pm
 event /from Aug 6th 2pm /to 4pm
 event project meeting /from Aug 6th 2pm /to 4pm
 event project meeting /from 06-07-2010 1400 /to 06-07-2010 1600
+event project meeting /from 06-07-2010 1400 /priority mediUM /to 06-07-2010 1600
+event sunbathing /from 01-01-2011 1200 /to 01-03-2011 1300 /priority hIGh
 list
 event exercising /to 4pm /from Aug 7th 2pm 
 list
-todo join sports club
-todo borrow book
+todo join sports club /priority HIGH
+todo borrow book /priority LOW
 mark 0
 list
 mark 7

@@ -12,7 +12,15 @@ public class EventTest {
     @Test
     public void eventConstructorTest() {
         HashMap<String, String> dummyArgs = new HashMap<>();
+
         dummyArgs.put("mainArg", "test");
+        try {
+            new Event(dummyArgs);
+        } catch (ParseException e) {
+            assertEquals(e.getMessage(), "Task argument requires a priority level");
+        }
+
+        dummyArgs.put("priority", "low");
         try {
             new Event(dummyArgs);
         } catch (ParseException e) {

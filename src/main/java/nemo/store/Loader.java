@@ -10,19 +10,21 @@ import java.util.Iterator;
 
 import nemo.task.Deadline;
 import nemo.task.Event;
+import nemo.task.Priority;
 import nemo.task.Task;
 import nemo.task.Todo;
 
 enum SaveFileFields {
-    TYPE(0),
-    IS_DONE(1),
-    GOAL(2),
-    BY_DATE(3),
-    FROM_DATE(3),
-    TO_DATE(4),
-    TODO_NUM_FIELDS(3),
-    DEADLINE_NUM_FIELDS(4),
-    EVENT_NUM_FIELDS(5);
+    PRIORITY(0),
+    TYPE(1),
+    IS_DONE(2),
+    GOAL(3),
+    BY_DATE(4),
+    FROM_DATE(4),
+    TO_DATE(5),
+    TODO_NUM_FIELDS(4),
+    DEADLINE_NUM_FIELDS(5),
+    EVENT_NUM_FIELDS(6);
 
     public final Integer index;
 
@@ -65,6 +67,7 @@ public class Loader {
         for (String rawTask : rawTasks) {
             String[] data = rawTask.split("\\|");
 
+            Priority priority = Priority.fromString(data[SaveFileFields.PRIORITY.index].trim());
             String type = data[SaveFileFields.TYPE.index].trim();
             boolean isDone = data[SaveFileFields.IS_DONE.index].trim().equals("1");
             String goal = data[SaveFileFields.GOAL.index].trim();
@@ -76,7 +79,7 @@ public class Loader {
                 if (data.length < SaveFileFields.TODO_NUM_FIELDS.index) {
                     throw new IllegalArgumentException(MessageFormat.format("Invalid todo format: {0}", rawTask));
                 }
-                newTask = new Todo(goal, isDone);
+                newTask = new Todo(goal, isDone, priority);
                 break;
 
             case "D":
@@ -85,7 +88,7 @@ public class Loader {
                             MessageFormat.format("Invalid deadline format: {0}", rawTask));
                 }
                 String byRawDate = data[SaveFileFields.BY_DATE.index].trim();
-                newTask = new Deadline(goal, byRawDate, isDone);
+                newTask = new Deadline(goal, byRawDate, isDone, priority);
                 break;
 
             case "E":
@@ -94,7 +97,7 @@ public class Loader {
                 }
                 String fromRawDate = data[SaveFileFields.FROM_DATE.index].trim();
                 String toRawDate = data[SaveFileFields.TO_DATE.index].trim();
-                newTask = new Event(goal, fromRawDate, toRawDate, isDone);
+                newTask = new Event(goal, fromRawDate, toRawDate, isDone, priority);
                 break;
 
             default:

@@ -2,10 +2,12 @@ package nemo.store;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import nemo.task.Priority;
 import nemo.task.Task;
 
 /**
@@ -53,6 +55,30 @@ public class Store {
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
     public Iterator<Task> getIterator() {
         return tasks.iterator();
+    }
+
+    /**
+    * Filter the tasks by their priorities
+    *
+    * @param filteredPriority Priority to keep
+    */
+    public ArrayList<Task> filterByPriority(Priority filteredPriority) {
+        return new ArrayList<>(tasks.stream()
+                .filter(t -> t.getPriority() == filteredPriority)
+                .toList());
+    }
+
+    /**
+     * Sort the tasks by their priorities
+     *
+     * @param shouldSortHighestPriorityFirst Whether to sort highest priorities at the top
+     */
+    public void sortByPriority(boolean shouldSortHighestPriorityFirst) {
+        if (shouldSortHighestPriorityFirst) {
+            tasks.sort(Comparator.comparing(Task::getPriority));
+        } else {
+            tasks.sort(Comparator.comparing(Task::getPriority).reversed());
+        }
     }
 
     /**

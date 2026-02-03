@@ -1,6 +1,7 @@
 package nemo.command;
 
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ import nemo.store.Loader;
 import nemo.store.Store;
 import nemo.task.Deadline;
 import nemo.task.Event;
+import nemo.task.Priority;
 import nemo.task.Task;
 import nemo.task.Todo;
 
@@ -46,7 +48,52 @@ public enum Command {
             if (store.isEmpty()) {
                 return "Nothing in the list yet.";
             }
-            return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
+            String filterKey = "filter";
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            if (argMap.containsKey(filterKey)) {
+                String filter = argMap.get(filterKey).trim().toUpperCase();
+                Priority filteredPriority = Priority.fromString(filter);
+                ArrayList<Task> filteredTasksList = store.filterByPriority(filteredPriority);
+                if (filteredTasksList.isEmpty()) {
+                    return "Nothing in the filtered list.";
+                }
+                return MessageFormat.format("Here are the tasks in your filtered list:\n{0}",
+                        Store.generateListFormattedTasks(filteredTasksList));
+            } else {
+                return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
+            }
+        }
+    },
+    SORT("sort") {
+        /**
+         * Sorts all the tasks in the store by their priorities.
+         *
+         * @param args   command arguments (later parsed inside command)
+         * @param store  the task store to operate on
+         * @param loader the loader to save / load the store
+         */
+        @Override
+        public String operate(String args, Store store, Loader loader) throws Exception {
+            String directionKey = "direction";
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            if (!argMap.containsKey(directionKey)) {
+                throw new ParseException("Sorting requires direction", 0);
+            }
+            assert (argMap.containsKey(directionKey));
+            String direction = argMap.get(directionKey).trim().toUpperCase();
+            if (!direction.equals("UP") && !direction.equals("DOWN")) {
+                throw new IllegalArgumentException("Invalid sorting direction.");
+            }
+            switch (direction) {
+            case "UP":
+                store.sortByPriority(true);
+                break;
+            case "DOWN":
+            default:
+                store.sortByPriority(false);
+                break;
+            }
+            return "Your tasks have been sorted by priorities.";
         }
     },
     MARK("mark") {
@@ -58,7 +105,8 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operate(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args,
+                Store store, Loader loader) throws Exception {
             return changeMark(args, store, true);
         }
     },

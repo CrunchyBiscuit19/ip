@@ -8,7 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
 enum TaskArg {
-    MAINARG("mainArg");
+    MAINARG("mainArg"),
+    PRIORITY("priority");
 
     private final String name;
 
@@ -29,36 +30,47 @@ public abstract class Task {
     protected static final String DATE_TIME_PATTERN = "dd-MM-yyyy HHmm";
     protected boolean isDone;
     protected String goal;
+    protected Priority priority;
 
     /**
      * Construct a task with a goal.
      *
-     * @param goal description of the task
-     * @param done initial completion state
+     * @param goal
+     *            description of the task
+     * @param done
+     *            initial completion state
      */
-    public Task(String goal, boolean done) {
+    public Task(String goal, boolean done, Priority priority) {
         this.goal = goal;
         this.isDone = done;
+        this.priority = priority;
     }
 
-    public Task(String goal) {
-        this(goal, false);
+    public Task(String goal, Priority priority) {
+        this(goal, false, priority);
     }
 
     /**
      * Construct a Task from a parsed argument map.
      * Main argument key "mainArg" contains the task goal.
      *
-     * @param argMap map of parsed arguments
-     * @throws ParseException if the required main argument is blank
+     * @param argMap
+     *            map of parsed arguments
+     * @throws ParseException
+     *             if the required main argument is blank
      */
-    public Task(HashMap<String, String> argMap) throws ParseException {
+    public Task(HashMap<String, String> argMap) throws ParseException, IllegalArgumentException {
         if (argMap.get(TaskArg.MAINARG.toString()).isBlank()) {
             throw new ParseException("Task argument requires a goal", 0);
         }
+        if (!argMap.containsKey(TaskArg.PRIORITY.toString())) {
+            throw new ParseException("Task argument requires a priority level", 0);
+        }
         assert (argMap.containsKey(TaskArg.MAINARG.toString()));
+        assert (argMap.containsKey(TaskArg.PRIORITY.toString()));
         this.goal = argMap.get(TaskArg.MAINARG.toString());
         this.isDone = false;
+        this.priority = Priority.fromString(argMap.get(TaskArg.PRIORITY.toString()));
     }
 
     /**
@@ -66,15 +78,13 @@ public abstract class Task {
      * Main argument is stored under the "mainArg" key.
      * All other keys are created when tokens start with '/' are encountered.
      *
-     * @param args raw argument string
+     * @param args
+     *            raw argument string
      * @return map of argument keys
-     * @throws ParseException if the args string is blank
+     * @throws ParseException
+     *             if the args string is blank
      */
     public static HashMap<String, String> parseArgs(String args) throws ParseException {
-        if (args.isBlank()) {
-            throw new ParseException("Task argument cannot be blank.", 0);
-        }
-
         HashMap<String, StringBuilder> argBuilderMap = new HashMap<>();
         String[] argTokens = args.split(" ");
         String lastKey = TaskArg.MAINARG.toString();
@@ -122,12 +132,23 @@ public abstract class Task {
     }
 
     /**
+     * Return the priority level of the task
+     *
+     * @return the priority level of the task
+     */
+    public Priority getPriority() {
+        return priority;
+    }
+
+    /**
      * Return the summary of this task
      *
      * @return summary string of the task
      */
     public String getSummary() {
-        return MessageFormat.format("[{0}][{1}] {2}", getTypeIcon(), getStatusIcon(), getDescription());
+        return MessageFormat.format("[{0}][{1}][{2}] {3}", String.format("%-4s", priority.toString()), getTypeIcon(),
+                getStatusIcon(),
+                getDescription());
     }
 
     public void mark() {
@@ -146,10 +167,12 @@ public abstract class Task {
     /**
      * Parse a string into a LocalDateTime format.
      *
-     * @param rawDateTimeString The raw string to be parsed
+     * @param rawDateTimeString
+     *            The raw string to be parsed
      * @return A LocalDateTime that is parsed from the date passed in.
-     * @throws DateTimeParseException when the raw string is not in the expected
-     *                                date time patten.
+     * @throws DateTimeParseException
+     *             when the raw string is not in the expected
+     *             date time patten.
      */
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
         // Solution adapted from https://stackoverflow.com/a/22463063
@@ -167,7 +190,8 @@ public abstract class Task {
     /**
      * Parse a datetime into a string
      *
-     * @param datetime the datetime to be converted to a string
+     * @param datetime
+     *            the datetime to be converted to a string
      * @return string representing the datetime
      */
     protected static String dateTimeToString(LocalDateTime datetime) {
