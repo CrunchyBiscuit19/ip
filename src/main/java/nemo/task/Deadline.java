@@ -58,6 +58,7 @@ public class Deadline extends Task {
         if (!argMap.containsKey(DeadlineArg.BY.toString())) {
             throw new ParseException("Task argument requires a by date", 0);
         }
+        assert (argMap.containsKey(DeadlineArg.BY.toString()));
         this.by = parseDateTime(argMap.get(DeadlineArg.BY.toString()));
     }
 

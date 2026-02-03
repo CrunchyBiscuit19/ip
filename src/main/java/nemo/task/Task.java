@@ -55,6 +55,7 @@ public abstract class Task {
         if (argMap.get(TaskArg.MAINARG.toString()).isBlank()) {
             throw new ParseException("Task argument requires a goal", 0);
         }
+        assert (argMap.containsKey(TaskArg.MAINARG.toString()));
         this.goal = argMap.get(TaskArg.MAINARG.toString());
         this.done = false;
     }
