@@ -25,33 +25,40 @@ enum DeadlineArg {
  * Task representing a deadline with a single due datetime.
  */
 public class Deadline extends Task {
-    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3}";
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
     private LocalDateTime by;
 
     /**
      * Construct a Deadline with goal and by datetime.
      *
-     * @param goal description of the deadline
-     * @param by   due datetime string in "dd-MM-yyyy HHmm" format
-     * @param done initial completion state
-     * @throws DateTimeParseException if the datetime cannot be parsed
+     * @param goal
+     *            description of the deadline
+     * @param by
+     *            due datetime string in "dd-MM-yyyy HHmm" format
+     * @param done
+     *            initial completion state
+     * @throws DateTimeParseException
+     *             if the datetime cannot be parsed
      */
-    public Deadline(String goal, String by, boolean done) throws DateTimeParseException {
-        super(goal, done);
+    public Deadline(String goal, String by, boolean done, Priority priority) throws DateTimeParseException {
+        super(goal, done, priority);
         this.by = parseDateTime(by);
     }
 
-    public Deadline(String goal, String by) throws DateTimeParseException {
-        this(goal, by, false);
+    public Deadline(String goal, String by, Priority priority) throws DateTimeParseException {
+        this(goal, by, false, priority);
     }
 
     /**
      * Construct a Deadline from a parsed argument map.
      * Keys "mainArg" and "by" should be present.
      *
-     * @param argMap map of parsed arguments
-     * @throws ParseException         if required keys are missing or blank
-     * @throws DateTimeParseException if datetime parsing fails
+     * @param argMap
+     *            map of parsed arguments
+     * @throws ParseException
+     *             if required keys are missing or blank
+     * @throws DateTimeParseException
+     *             if datetime parsing fails
      */
     public Deadline(HashMap<String, String> argMap) throws ParseException, DateTimeParseException {
         super(argMap);
@@ -84,7 +91,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
+        return MessageFormat.format(SAVE_LINE_FORMAT, priority.toString(), getTypeIcon(), isDone ? 1 : 0, goal,
                 dateTimeToString(by));
     }
 }

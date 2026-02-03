@@ -8,14 +8,14 @@ import java.util.HashMap;
  * Task representing a Todo with a goal and a completion status
  */
 public class Todo extends Task {
-    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2}";
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3}";
 
-    public Todo(String goal, boolean done) {
-        super(goal, done);
+    public Todo(String goal, boolean done, Priority priority) {
+        super(goal, done, priority);
     }
 
-    public Todo(String goal) {
-        this(goal, false);
+    public Todo(String goal, Priority priority) {
+        this(goal, false, priority);
     }
 
     public Todo(HashMap<String, String> argMap) throws ParseException {
@@ -34,6 +34,6 @@ public class Todo extends Task {
 
     @Override
     public String getSerialized() {
-        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal);
+        return MessageFormat.format(SAVE_LINE_FORMAT, priority.toString(), getTypeIcon(), isDone ? 1 : 0, goal);
     }
 }

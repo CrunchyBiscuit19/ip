@@ -26,36 +26,44 @@ enum EventArg {
  * Task representing an event that has a start ("from") and end ("to") datetime.
  */
 public class Event extends Task {
-    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4} | {5}";
     private LocalDateTime from;
     private LocalDateTime to;
 
     /**
      * Construct an Event.
      *
-     * @param goal description of the event
-     * @param from start datetime string in "dd-MM-yyyy HHmm" format
-     * @param to   end datetime string in "dd-MM-yyyy HHmm" format
-     * @param done initial completion state
-     * @throws DateTimeParseException if either datetime cannot be parsed
+     * @param goal
+     *            description of the event
+     * @param from
+     *            start datetime string in "dd-MM-yyyy HHmm" format
+     * @param to
+     *            end datetime string in "dd-MM-yyyy HHmm" format
+     * @param done
+     *            initial completion state
+     * @throws DateTimeParseException
+     *             if either datetime cannot be parsed
      */
-    public Event(String goal, String from, String to, boolean done) throws DateTimeParseException {
-        super(goal, done);
+    public Event(String goal, String from, String to, boolean done, Priority priority) throws DateTimeParseException {
+        super(goal, done, priority);
         this.from = parseDateTime(from);
         this.to = parseDateTime(to);
     }
 
-    public Event(String goal, String from, String to) throws DateTimeParseException {
-        this(goal, from, to, false);
+    public Event(String goal, String from, String to, Priority priority) throws DateTimeParseException {
+        this(goal, from, to, false, priority);
     }
 
     /**
      * Construct an Event from a parsed argument map.
      * Keys "mainArg", "from" and "to" should be present.
      *
-     * @param argMap map of parsed arguments
-     * @throws ParseException         if required keys are missing or blank
-     * @throws DateTimeParseException if datetime parsing fails
+     * @param argMap
+     *            map of parsed arguments
+     * @throws ParseException
+     *             if required keys are missing or blank
+     * @throws DateTimeParseException
+     *             if datetime parsing fails
      */
     public Event(HashMap<String, String> argMap) throws ParseException, DateTimeParseException {
         super(argMap);
@@ -95,7 +103,7 @@ public class Event extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
+        return MessageFormat.format(SAVE_LINE_FORMAT, priority.toString(), getTypeIcon(), isDone ? 1 : 0, goal,
                 dateTimeToString(from),
                 dateTimeToString(to));
     }
