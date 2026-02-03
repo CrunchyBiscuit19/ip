@@ -10,49 +10,87 @@ import nemo.task.Task;
  * Collection of Task objects.
  */
 public class Store {
-    private ArrayList<Task> store;
+    private ArrayList<Task> tasks;
 
     public Store() {
-        this.store = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public Task get(int id) {
-        return this.store.get(id);
+        return this.tasks.get(id);
     }
 
     public void add(Task task) {
-        this.store.add(task);
+        this.tasks.add(task);
     }
 
+    /**
+     * Add multiple to tasks to the store at the same time
+     *
+     * @param tasks Var args of tasks
+     */
     public void add(Task... tasks) {
         for (int i = 0; i < tasks.length; i++) {
-            this.store.add(tasks[i]);
+            this.tasks.add(tasks[i]);
         }
     }
 
     public void remove(int i) {
-        this.store.remove(i);
+        this.tasks.remove(i);
     }
 
     public int size() {
-        return this.store.size();
+        return this.tasks.size();
+    }
+
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
     }
 
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
-    public Iterator<Task> iterator() {
-        return store.iterator();
+    public Iterator<Task> getIterator() {
+        return tasks.iterator();
     }
 
     /**
-     * Generate nicely formatted list of tasks for printing.
+     * Generate nicely formatted list of all tasks for printing.
      *
      * @return list of task summaries
      */
     public String generateList() {
+        return generateListFormattedTasks(tasks);
+    }
+
+    /**
+     * Find tasks whioh contain the query line
+     *
+     * @param query string to match tasks against
+     * @return The list of tasks which matched the query
+     */
+    public ArrayList<Task> findTasks(String query) {
+        Iterator<Task> tasksIt = this.getIterator();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        while (tasksIt.hasNext()) {
+            Task task = tasksIt.next();
+            if (task.getDescription().contains(query)) {
+                matchedTasks.add(task);
+            }
+        }
+        return matchedTasks;
+    }
+
+    /**
+     * Generate nicely formatted list of certain tasks for printing.
+     *
+     * @param tasksList List to iterate through
+     * @return list of task summaries
+     */
+    public static String generateListFormattedTasks(ArrayList<Task> tasksList) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < store.size(); i++) {
-            Task task = store.get(i);
-            sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
+        for (int i = 0; i < tasksList.size(); i++) {
+            Task task = tasksList.get(i);
+            String threeDigitIndex = String.format("%03d", i + 1);
+            sb.append(MessageFormat.format("{0}.{1}\n", threeDigitIndex, task.getSummary()));
         }
         return sb.toString().trim();
     }

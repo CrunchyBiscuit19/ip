@@ -3,7 +3,6 @@ package nemo.command;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import nemo.exception.NotCommandException;
 import nemo.store.Loader;
@@ -28,7 +27,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = true;
             return "Bye. Hope to see you again soon!";
         }
@@ -42,9 +41,9 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
-            if (store.size() == 0) {
+            if (store.isEmpty()) {
                 return "Nothing in the list yet.";
             }
             return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
@@ -59,7 +58,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             return changeMark(args, store, true);
         }
     },
@@ -72,7 +71,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             return changeMark(args, store, false);
         }
     },
@@ -85,7 +84,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Todo todo = new Todo(argMap);
@@ -103,7 +102,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Deadline deadline = new Deadline(argMap);
@@ -121,7 +120,7 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             HashMap<String, String> argMap = Task.parseArgs(args);
             Event event = new Event(argMap);
@@ -139,15 +138,15 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             try {
                 Task task = store.get(Integer.parseInt(args) - 1);
                 String taskSummary = task.getSummary();
                 store.remove(Integer.parseInt(args) - 1);
                 return MessageFormat.format(
-                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n",
-                        taskSummary, store.size());
+                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n", taskSummary,
+                        store.size());
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Not task ID.");
             } catch (IndexOutOfBoundsException e) {
@@ -164,27 +163,14 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operation(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = false;
             String query = args;
-            Iterator<Task> storeIt = store.iterator();
-            ArrayList<Task> matchedTasks = new ArrayList<>();
-            while (storeIt.hasNext()) {
-                Task task = storeIt.next();
-                if (task.getDescription().contains(query)) {
-                    matchedTasks.add(task);
-                }
-            }
+            ArrayList<Task> matchedTasks = store.findTasks(query);
             if (matchedTasks.isEmpty()) {
                 return "No matching tasks found.";
             }
-            StringBuilder sb = new StringBuilder();
-            sb.append("Here are the matching tasks in your list:");
-            for (int i = 0; i < matchedTasks.size(); i++) {
-                Task task = matchedTasks.get(i);
-                sb.append(MessageFormat.format("{0}.{1}\n", String.format("%03d", i + 1), task.getSummary()));
-            }
-            return sb.toString();
+            return Store.generateListFormattedTasks(matchedTasks);
         }
     };
 
@@ -226,7 +212,7 @@ public enum Command {
      * @param store  the task store to operate on
      * @param loader the loader to save / load the store
      */
-    public abstract String operation(String args, Store store, Loader loader) throws Exception;
+    public abstract String operate(String args, Store store, Loader loader) throws Exception;
 
     @Override
     public String toString() {

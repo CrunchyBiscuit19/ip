@@ -15,8 +15,8 @@ import nemo.store.Store;
  * Responsible for running GUI above Nemo.
  */
 public class Gui extends Application {
-    private static int MIN_HEIGHT = 220;
-    private static int MIN_WIDTH = 417;
+    private static final int MIN_HEIGHT = 220;
+    private static final int MIN_WIDTH = 417;
 
     @Override
     public void start(Stage stage) {

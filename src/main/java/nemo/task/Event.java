@@ -3,7 +3,6 @@ package nemo.task;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
@@ -27,6 +26,7 @@ enum EventArg {
  * Task representing an event that has a start ("from") and end ("to") datetime.
  */
 public class Event extends Task {
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3} | {4}";
     private LocalDateTime from;
     private LocalDateTime to;
 
@@ -79,8 +79,8 @@ public class Event extends Task {
     @Override
     public String getDescription() {
         return MessageFormat.format("{0} (from: {1} to: {2})", goal,
-                from.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")),
-                to.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
+                dateTimeToString(from),
+                dateTimeToString(to));
     }
 
     @Override
@@ -95,8 +95,8 @@ public class Event extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2} | {3} | {4}", getTypeIcon(), done ? 1 : 0, goal,
-                from.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")),
-                to.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
+                dateTimeToString(from),
+                dateTimeToString(to));
     }
 }

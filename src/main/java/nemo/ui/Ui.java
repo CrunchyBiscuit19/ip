@@ -48,7 +48,7 @@ public class Ui {
         String commandStr = splitInput[0];
         String args = splitInput.length >= 2 ? splitInput[1] : "";
         try {
-            Command.fromString(commandStr).operation(args, store, loader);
+            Command.fromString(commandStr).operate(args, store, loader);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

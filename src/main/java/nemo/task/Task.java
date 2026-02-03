@@ -26,7 +26,8 @@ enum TaskArg {
  * Abstract base class representing a general task with a goal and status.
  */
 public abstract class Task {
-    protected boolean done;
+    protected static final String DATE_TIME_PATTERN = "dd-MM-yyyy HHmm";
+    protected boolean isDone;
     protected String goal;
 
     /**
@@ -37,7 +38,7 @@ public abstract class Task {
      */
     public Task(String goal, boolean done) {
         this.goal = goal;
-        this.done = done;
+        this.isDone = done;
     }
 
     public Task(String goal) {
@@ -57,7 +58,7 @@ public abstract class Task {
         }
         assert (argMap.containsKey(TaskArg.MAINARG.toString()));
         this.goal = argMap.get(TaskArg.MAINARG.toString());
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -117,7 +118,7 @@ public abstract class Task {
     public abstract String getSerialized();
 
     public String getStatusIcon() {
-        return (done ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
@@ -130,11 +131,11 @@ public abstract class Task {
     }
 
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     public void unmark() {
-        done = false;
+        isDone = false;
     }
 
     @Override
@@ -152,14 +153,24 @@ public abstract class Task {
      */
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
         // Solution adapted from https://stackoverflow.com/a/22463063
-        String pattern = "dd-MM-yyyy HHmm";
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
             return LocalDateTime.parse(rawDateTimeString, formatter);
         } catch (DateTimeParseException e) {
             throw new DateTimeParseException(
-                    MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString, pattern),
-                    pattern, 0);
+                    MessageFormat.format("{0} is not a valid date for format {1}.", rawDateTimeString,
+                            DATE_TIME_PATTERN),
+                    DATE_TIME_PATTERN, 0);
         }
+    }
+
+    /**
+     * Parse a datetime into a string
+     *
+     * @param datetime the datetime to be converted to a string
+     * @return string representing the datetime
+     */
+    protected static String dateTimeToString(LocalDateTime datetime) {
+        return datetime.format(DateTimeFormatter.ofPattern(DATE_TIME_PATTERN));
     }
 }
