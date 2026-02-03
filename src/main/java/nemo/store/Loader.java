@@ -13,6 +13,24 @@ import nemo.task.Event;
 import nemo.task.Task;
 import nemo.task.Todo;
 
+enum SaveFileFields {
+    TYPE(0),
+    IS_DONE(1),
+    GOAL(2),
+    BY_DATE(3),
+    FROM_DATE(3),
+    TO_DATE(4),
+    TODO_NUM_FIELDS(3),
+    DEADLINE_NUM_FIELDS(4),
+    EVENT_NUM_FIELDS(5);
+
+    public final Integer index;
+
+    SaveFileFields(int index) {
+        this.index = index;
+    }
+}
+
 /**
  * Responsible for loading tasks from and saving tasks to a save file.
  * Tasks are serialized as single lines when saving and converted
@@ -47,36 +65,35 @@ public class Loader {
         for (String rawTask : rawTasks) {
             String[] data = rawTask.split("\\|");
 
-            if (data.length < 3) {
-                throw new IllegalArgumentException(MessageFormat.format("Invalid task format: {0}", rawTask));
-            }
-
-            String type = data[0].trim();
-            boolean isDone = data[1].trim().equals("1");
-            String goal = data[2].trim();
+            String type = data[SaveFileFields.TYPE.index].trim();
+            boolean isDone = data[SaveFileFields.IS_DONE.index].trim().equals("1");
+            String goal = data[SaveFileFields.GOAL.index].trim();
 
             Task newTask;
 
             switch (type) {
             case "T":
+                if (data.length < SaveFileFields.TODO_NUM_FIELDS.index) {
+                    throw new IllegalArgumentException(MessageFormat.format("Invalid todo format: {0}", rawTask));
+                }
                 newTask = new Todo(goal, isDone);
                 break;
 
             case "D":
-                if (data.length < 4) {
+                if (data.length < SaveFileFields.DEADLINE_NUM_FIELDS.index) {
                     throw new IllegalArgumentException(
                             MessageFormat.format("Invalid deadline format: {0}", rawTask));
                 }
-                String byRawDate = data[3].trim();
+                String byRawDate = data[SaveFileFields.BY_DATE.index].trim();
                 newTask = new Deadline(goal, byRawDate, isDone);
                 break;
 
             case "E":
-                if (data.length < 5) {
+                if (data.length < SaveFileFields.EVENT_NUM_FIELDS.index) {
                     throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
                 }
-                String fromRawDate = data[3].trim();
-                String toRawDate = data[4].trim();
+                String fromRawDate = data[SaveFileFields.FROM_DATE.index].trim();
+                String toRawDate = data[SaveFileFields.TO_DATE.index].trim();
                 newTask = new Event(goal, fromRawDate, toRawDate, isDone);
                 break;
 
