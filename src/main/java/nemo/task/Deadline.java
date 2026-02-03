@@ -3,7 +3,6 @@ package nemo.task;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
@@ -26,6 +25,7 @@ enum DeadlineArg {
  * Task representing a deadline with a single due datetime.
  */
 public class Deadline extends Task {
+    private static final String SAVE_LINE_FORMAT = "{0} | {1} | {2} | {3}";
     private LocalDateTime by;
 
     /**
@@ -69,7 +69,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getDescription() {
-        return MessageFormat.format("{0} (by: {1})", goal, by.format(DateTimeFormatter.ofPattern("d MMMM yyyy ha")));
+        return MessageFormat.format("{0} (by: {1})", goal, dateTimeToString(by));
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getSerialized() {
-        return MessageFormat.format("{0} | {1} | {2} | {3}", getTypeIcon(), done ? 1 : 0, goal,
-                by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+        return MessageFormat.format(SAVE_LINE_FORMAT, getTypeIcon(), isDone ? 1 : 0, goal,
+                dateTimeToString(by));
     }
 }
