@@ -65,6 +65,8 @@ public class Event extends Task {
         if (!argMap.containsKey(EventArg.TO.toString())) {
             throw new ParseException("Task argument requires a to date", 0);
         }
+        assert (argMap.containsKey(EventArg.FROM.toString()));
+        assert (argMap.containsKey(EventArg.TO.toString()));
         this.from = parseDateTime(argMap.get(EventArg.FROM.toString()));
         this.to = parseDateTime(argMap.get(EventArg.TO.toString()));
     }
