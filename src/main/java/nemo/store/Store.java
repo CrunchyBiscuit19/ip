@@ -67,11 +67,11 @@ public class Store {
      * @param query string to match tasks against
      * @return The list of tasks which matched the query
      */
-    public String findTasks(String query) {
-        Iterator<Task> tasksIt = tasks.getIterator();
+    public ArrayList<Task> findTasks(String query) {
+        Iterator<Task> tasksIt = this.getIterator();
         ArrayList<Task> matchedTasks = new ArrayList<>();
-        while (taskIt.hasNext()) {
-            Task task = taskIt.next();
+        while (tasksIt.hasNext()) {
+            Task task = tasksIt.next();
             if (task.getDescription().contains(query)) {
                 matchedTasks.add(task);
             }
