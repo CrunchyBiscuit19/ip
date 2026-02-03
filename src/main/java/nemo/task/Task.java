@@ -136,6 +136,15 @@ public abstract class Task {
     }
 
     /**
+     * Return the priority level of the task
+     *
+     * @return the priority level of the task
+     */
+    public Priority getPriority() {
+        return priority;
+    }
+
+    /**
      * Return the summary of this task
      *
      * @return summary string of the task

@@ -1,6 +1,7 @@
 package nemo.command;
 
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,6 +50,38 @@ public enum Command {
             return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
         }
     },
+    SORT("sort") {
+        /**
+         * Sorts all the tasks in the store by their priorities.
+         *
+         * @param args   command arguments (later parsed inside command)
+         * @param store  the task store to operate on
+         * @param loader the loader to save / load the store
+         */
+        @Override
+        public String operate(String args, Store store, Loader loader) throws Exception {
+            String directionKey = "direction";
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            if (!argMap.containsKey(directionKey)) {
+                throw new ParseException("Sorting requires direction", 0);
+            }
+            assert (argMap.containsKey(directionKey));
+            String direction = argMap.get(directionKey).trim().toUpperCase();
+            if (!direction.equals("UP") && !direction.equals("DOWN")) {
+                throw new IllegalArgumentException("Invalid sorting direction.");
+            }
+            switch (direction) {
+            case "UP":
+                store.sortByPriority(true);
+                break;
+            case "DOWN":
+            default:
+                store.sortByPriority(false);
+                break;
+            }
+            return "Your tasks have been sorted by priorities.";
+        }
+    },
     MARK("mark") {
         /**
          * Mark a specified task as done.
@@ -58,7 +91,8 @@ public enum Command {
          * @param loader the loader to save / load the store
          */
         @Override
-        public String operate(String args, Store store, Loader loader) throws Exception {
+        public String operate(String args,
+                Store store, Loader loader) throws Exception {
             return changeMark(args, store, true);
         }
     },

@@ -2,6 +2,7 @@ package nemo.store;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -53,6 +54,19 @@ public class Store {
     // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
     public Iterator<Task> getIterator() {
         return tasks.iterator();
+    }
+
+    /**
+     * Sort the priorities by their rank
+     *
+     * @param shouldSortHighestPriorityFirst Whether to sort highest priorities at the top
+     */
+    public void sortByPriority(boolean shouldSortHighestPriorityFirst) {
+        if (shouldSortHighestPriorityFirst) {
+            tasks.sort(Comparator.comparing(Task::getPriority));
+        } else {
+            tasks.sort(Comparator.comparing(Task::getPriority).reversed());
+        }
     }
 
     /**
