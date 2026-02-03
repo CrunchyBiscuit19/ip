@@ -10,6 +10,7 @@ import nemo.store.Loader;
 import nemo.store.Store;
 import nemo.task.Deadline;
 import nemo.task.Event;
+import nemo.task.Priority;
 import nemo.task.Task;
 import nemo.task.Todo;
 
@@ -47,7 +48,20 @@ public enum Command {
             if (store.isEmpty()) {
                 return "Nothing in the list yet.";
             }
-            return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
+            String filterKey = "filter";
+            HashMap<String, String> argMap = Task.parseArgs(args);
+            if (argMap.containsKey(filterKey)) {
+                String filter = argMap.get(filterKey).trim().toUpperCase();
+                Priority filteredPriority = Priority.fromString(filter);
+                ArrayList<Task> filteredTasksList = store.filterByPriority(filteredPriority);
+                if (filteredTasksList.isEmpty()) {
+                    return "Nothing in the filtered list.";
+                }
+                return MessageFormat.format("Here are the tasks in your filtered list:\n{0}",
+                        Store.generateListFormattedTasks(filteredTasksList));
+            } else {
+                return MessageFormat.format("Here are the tasks in your list:\n{0}", store.generateList());
+            }
         }
     },
     SORT("sort") {

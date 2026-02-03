@@ -85,10 +85,6 @@ public abstract class Task {
      *             if the args string is blank
      */
     public static HashMap<String, String> parseArgs(String args) throws ParseException {
-        if (args.isBlank()) {
-            throw new ParseException("Task argument cannot be blank.", 0);
-        }
-
         HashMap<String, StringBuilder> argBuilderMap = new HashMap<>();
         String[] argTokens = args.split(" ");
         String lastKey = TaskArg.MAINARG.toString();

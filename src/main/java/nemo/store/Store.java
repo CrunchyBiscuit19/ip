@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import nemo.task.Priority;
 import nemo.task.Task;
 
 /**
@@ -57,7 +58,18 @@ public class Store {
     }
 
     /**
-     * Sort the priorities by their rank
+    * Filter the tasks by their priorities
+    *
+    * @param filteredPriority Priority to keep
+    */
+    public ArrayList<Task> filterByPriority(Priority filteredPriority) {
+        return new ArrayList<>(tasks.stream()
+                .filter(t -> t.getPriority() == filteredPriority)
+                .toList());
+    }
+
+    /**
+     * Sort the tasks by their priorities
      *
      * @param shouldSortHighestPriorityFirst Whether to sort highest priorities at the top
      */
