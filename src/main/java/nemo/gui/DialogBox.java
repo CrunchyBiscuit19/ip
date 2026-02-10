@@ -45,8 +45,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         if (hasError) {
-            // Solution inspired by https://stackoverflow.com/a/61052739
+            // @@author CrunchyBiscuit19-reused
+            // Reused from https://stackoverflow.com/a/61052739
+            // with minor modifications
             dialog.setTextFill(JAVAFX_RED_COLOR);
+            // @@author
         }
         displayPicture.setImage(image);
     }

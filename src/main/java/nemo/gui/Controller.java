@@ -121,10 +121,13 @@ public class Controller extends AnchorPane {
             } catch (Exception e) {
                 showNotification(e.getMessage());
             } finally {
-                // Solution adapted from https://stackoverflow.com/a/30543838
+                // @@author CrunchyBiscuit19-reused
+                // Reused from https://stackoverflow.com/a/30543838
+                // with minor modifications
                 PauseTransition delay = new PauseTransition(Duration.seconds(1));
                 delay.setOnFinished(event -> Platform.exit());
                 delay.play();
+                // @@author
             }
         }
     }

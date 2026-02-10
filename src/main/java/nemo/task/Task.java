@@ -179,7 +179,7 @@ public abstract class Task {
      *             date time patten.
      */
     protected static LocalDateTime parseDateTime(String rawDateTimeString) throws DateTimeParseException {
-        // Solution adapted from https://stackoverflow.com/a/22463063
+        // Solution below inspired by https://stackoverflow.com/a/22463063
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
             return LocalDateTime.parse(rawDateTimeString, formatter);

@@ -31,6 +31,7 @@ public class Gui extends Application {
             stage.setScene(scene);
             stage.setMinHeight(MIN_HEIGHT);
             stage.setMinWidth(MIN_WIDTH);
+            stage.setTitle("NEMO");
             fxmlLoader.<Controller>getController().setStoreLoader(store, loader);
             stage.show();
         } catch (IOException e) {

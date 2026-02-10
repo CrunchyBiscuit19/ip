@@ -81,10 +81,13 @@ public class Store {
         return this.tasks.isEmpty();
     }
 
-    // Solution adapted from https://www.geeksforgeeks.org/java/iterators-in-java/
     public Iterator<Task> getIterator() {
         assert this.tasks != null : "Store tasks list is null";
+        // @@author CrunchyBiscuit19-reused
+        // Reused from https://www.geeksforgeeks.org/java/iterators-in-java/
+        // with minor modifications
         return tasks.iterator();
+        // @@author
     }
 
     /**

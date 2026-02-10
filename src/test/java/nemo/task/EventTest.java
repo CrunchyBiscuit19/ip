@@ -22,8 +22,11 @@ public class EventTest {
         } catch (ParseException e) {
             assertEquals(e.getMessage(), "Task argument requires a priority level");
         } catch (IncorrectDateTimeException e) {
-            // Solution adapted from https://www.baeldung.com/junit-fail
+            // @@author CrunchyBiscuit19-reused
+            // Reused from https://www.baeldung.com/junit-fail
+            // with minor modifications
             fail("IncorrectDateTimeException should not be thrown");
+            // @@author
         }
 
         dummyArgs.put("priority", "low");

@@ -19,7 +19,7 @@ import nemo.task.Todo;
  * Each enum constant implements the operation method to perform its behavior.
  */
 public enum Command {
-    // Solution below adapted from https://stackoverflow.com/a/14968372
+    // Solution below inspired by https://stackoverflow.com/a/14968372
     BYE("bye") {
         /**
          * Leaves the conversation.
@@ -230,7 +230,7 @@ public enum Command {
         this.command = command;
     }
 
-    // Solution below adapted from https://stackoverflow.com/a/25411863
+    // Solution below inspired by https://stackoverflow.com/a/25411863
     static {
         commandMap = new HashMap<>();
         for (Command cmd : Command.values()) {
