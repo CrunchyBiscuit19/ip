@@ -13,12 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's
  * face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final Color JAVAFX_RED_COLOR = Color.color(1, 0, 0);
     @FXML
     private Label dialog;
     @FXML
@@ -27,11 +29,11 @@ public class DialogBox extends HBox {
     /**
      * Creates a dialog box representing the user and their input
      *
-     * @param player name of the agent
      * @param text   dialog text
      * @param image  profile image of dialog box
+     * @param hasError whether the command output from nemo has an error
      */
-    private DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image, Boolean hasError) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Controller.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -42,6 +44,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        if (hasError) {
+            // Solution inspired by https://stackoverflow.com/a/61052739
+            dialog.setTextFill(JAVAFX_RED_COLOR);
+        }
         displayPicture.setImage(image);
     }
 
@@ -64,7 +70,7 @@ public class DialogBox extends HBox {
      * @return dialog box of the user
      */
     public static DialogBox createUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        return new DialogBox(text, image, false);
     }
 
     /**
@@ -72,10 +78,11 @@ public class DialogBox extends HBox {
      *
      * @param text  the message said by nemo
      * @param image the profile image of nemo
+     * @param hasError whether the command output from nemo has an error
      * @return dialog box of nemo
      */
-    public static DialogBox createNemoDialog(String text, Image image) {
-        var db = new DialogBox(text, image);
+    public static DialogBox createNemoDialog(String text, Image image, Boolean hasError) {
+        var db = new DialogBox(text, image, hasError);
         db.flip();
         return db;
     }

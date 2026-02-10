@@ -102,15 +102,17 @@ public class Controller extends AnchorPane {
         String args = splitInput.length >= 2 ? splitInput[1] : ""; // Get rest of argument, or empty string if not
         // available
         String nemoText = "";
+        Boolean hasError = false;
         try {
             nemoText = Command.fromString(commandStr).operate(args, store, loader);
         } catch (Exception e) {
             nemoText = MessageFormat.format("ERROR | {0}", e.getMessage());
+            hasError = true;
         }
 
         dialogContainer.getChildren().addAll(
                 DialogBox.createUserDialog(input, userImage),
-                DialogBox.createNemoDialog(nemoText, nemoImage));
+                DialogBox.createNemoDialog(nemoText, nemoImage, hasError));
         userInput.clear();
 
         if (Command.isExit()) {
