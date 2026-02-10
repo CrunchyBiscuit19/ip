@@ -1,7 +1,9 @@
 package nemo.store;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
@@ -60,8 +62,10 @@ public class Loader {
         ArrayList<String> rawTasks = new ArrayList<>();
         try {
             rawTasks = new ArrayList<>(Files.lines(saveFilePath).toList());
-        } catch (IOException e) {
-            throw new IOException("Save file does not exist. Create tasks and save them to create one.");
+        } catch (AccessDeniedException e) {
+            throw new AccessDeniedException("Save file exists, but cannot be read due to lack of read permission.");
+        } catch (NoSuchFileException e) {
+            throw new NoSuchFileException("Save file does not exist. Create tasks and save them to create one.");
         }
 
         for (String rawTask : rawTasks) {
