@@ -30,6 +30,7 @@ event /from Aug 6th 2pm /to 4pm
 event project meeting /from Aug 6th 2pm /to 4pm
 event project meeting /from 06-07-2010 1400 /to 06-07-2010 1600
 event project meeting /from 06-07-2010 1400 /priority mediUM /to 06-07-2010 1600
+event sunbathing /from 01-03-2011 1200 /to 01-01-2011 1300 /priority hIGh
 event sunbathing /from 01-01-2011 1200 /to 01-03-2011 1300 /priority hIGh
 list
 event exercising /to 4pm /from Aug 7th 2pm 

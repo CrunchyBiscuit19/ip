@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 
+import nemo.exception.IncorrectDateTimeException;
+
 enum EventArg {
     FROM("from"),
     TO("to");
@@ -65,7 +67,8 @@ public class Event extends Task {
      * @throws DateTimeParseException
      *             if datetime parsing fails
      */
-    public Event(HashMap<String, String> argMap) throws ParseException, DateTimeParseException {
+    public Event(HashMap<String, String> argMap) throws ParseException, DateTimeParseException,
+            IncorrectDateTimeException {
         super(argMap);
         if (!argMap.containsKey(EventArg.FROM.toString())) {
             throw new ParseException("Task argument requires a from date", 0);
@@ -75,8 +78,15 @@ public class Event extends Task {
         }
         assert (argMap.containsKey(EventArg.FROM.toString()));
         assert (argMap.containsKey(EventArg.TO.toString()));
-        this.from = parseDateTime(argMap.get(EventArg.FROM.toString()));
-        this.to = parseDateTime(argMap.get(EventArg.TO.toString()));
+
+        LocalDateTime fromTmp = parseDateTime(argMap.get(EventArg.FROM.toString()));
+        LocalDateTime toTmp = parseDateTime(argMap.get(EventArg.TO.toString()));
+        if (fromTmp.isEqual(toTmp) || fromTmp.isAfter(toTmp)) {
+            throw new IncorrectDateTimeException("From datetime must come strictly before to datetime.");
+        }
+
+        this.from = fromTmp;
+        this.to = toTmp;
     }
 
     /**
