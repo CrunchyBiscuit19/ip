@@ -31,7 +31,7 @@ public enum Command {
         @Override
         public String operate(String args, Store store, Loader loader) throws Exception {
             shouldExit = true;
-            return "Bye. Hope to see you again soon!";
+            return "Bye.";
         }
     },
     LIST("list") {
@@ -137,7 +137,7 @@ public enum Command {
             HashMap<String, String> argMap = Task.parseArgs(args);
             Todo todo = new Todo(argMap);
             store.add(todo);
-            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+            return MessageFormat.format("I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
                     todo.getSummary(), store.size());
         }
     },
@@ -155,7 +155,7 @@ public enum Command {
             HashMap<String, String> argMap = Task.parseArgs(args);
             Deadline deadline = new Deadline(argMap);
             store.add(deadline);
-            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+            return MessageFormat.format("I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
                     deadline.getSummary(), store.size());
         }
     },
@@ -173,7 +173,7 @@ public enum Command {
             HashMap<String, String> argMap = Task.parseArgs(args);
             Event event = new Event(argMap);
             store.add(event);
-            return MessageFormat.format("Got it. I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
+            return MessageFormat.format("I''ve added this task:\n{0}\nNow you have {1} tasks in the list.\n",
                     event.getSummary(), store.size());
         }
     },
@@ -193,7 +193,7 @@ public enum Command {
                 String taskSummary = task.getSummary();
                 store.remove(Integer.parseInt(args) - 1);
                 return MessageFormat.format(
-                        "Noted. I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n", taskSummary,
+                        "I''ve removed this task:\n{0}\nNow you have {1} tasks in the list.\n", taskSummary,
                         store.size());
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Not task ID.");
@@ -287,10 +287,10 @@ public enum Command {
             StringBuilder sb = new StringBuilder();
             if (mark) {
                 task.mark();
-                sb.append("Nice! I've marked this task as done:\n");
+                sb.append("I've marked this task as done:\n");
             } else {
                 task.unmark();
-                sb.append("OK, I've marked this task as not done yet:\n");
+                sb.append("I've marked this task as not done yet:\n");
             }
             sb.append(task.getSummary());
             return sb.toString();
