@@ -8,7 +8,7 @@ import nemo.exception.NotCommandException;
 
 public class CommandTest {
     @Test
-    public void fromStringTest() {
+    public void commandFromString_validStringConversion_convertValidStringsOnly() {
         try {
             assertEquals(Command.fromString("bye"), Command.BYE);
             assertEquals(Command.fromString("list"), Command.LIST);

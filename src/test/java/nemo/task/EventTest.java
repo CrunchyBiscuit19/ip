@@ -13,7 +13,7 @@ import nemo.exception.IncorrectDateTimeException;
 
 public class EventTest {
     @Test
-    public void eventConstructorTest() {
+    public void eventConstructor_invalidArguments_exceptionThrown() {
         HashMap<String, String> dummyArgs = new HashMap<>();
 
         dummyArgs.put("mainArg", "test");

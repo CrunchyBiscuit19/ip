@@ -159,6 +159,10 @@ public abstract class Task {
         isDone = false;
     }
 
+    public String getGoal() {
+        return goal;
+    }
+
     @Override
     public String toString() {
         return getSummary();
