@@ -11,7 +11,8 @@
     prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/17"
     xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" minHeight="-Infinity" style="-fx-background-color: #EEEEEE;"
+        <Label fx:id="dialog" minHeight="-Infinity"
+            style="-fx-background-color: #EEEEEE; -fx-font-family: monospace;"
             text="Label" wrapText="true">
             <HBox.margin>
                 <Insets left="7.0" right="7.0" />
@@ -19,9 +20,6 @@
             <padding>
                 <Insets bottom="6.0" left="6.0" right="6.0" top="2.0" />
             </padding>
-            <font>
-                <Font name="Courier New" size="12.0" />
-            </font>
         </Label>
         <StackPane fx:id="displayPictureWrapper">
             <children>
