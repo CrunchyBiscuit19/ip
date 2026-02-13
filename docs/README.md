@@ -27,10 +27,10 @@ _Save File section below adapted from [AB3 User Guide](https://se-education.org/
 
 * The save file is in plain text and can be edited directly by advanced users, though great care must be taken to avoid corrupting the file.
 
-> [!CAUTION]
-> If the save file is corrupted, NEMO will not be able to parse the save data correctly, and will behave as if no tasks were ever saved. 
-> If the user were to exit the program in this state, the save data would be overriden and permanently lost. 
-> For this reason, users who wish to edit the save file should make a backup of it before proceeding.
+> CAUTION<br/>
+> If the save file is corrupted, NEMO will not be able to parse the save data correctly, and will behave as if no tasks were ever saved.<br/>
+> If the user were to exit the program in this state, the save data would be overriden and permanently lost. <br/>
+> For this reason, users who wish to edit the save file should make a backup of it before proceeding.<br/>
 
 ## Command Format
 
