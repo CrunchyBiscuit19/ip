@@ -1,9 +1,9 @@
 # Nemo User Guide
 
-![[Ui.png]]
+![ui](Ui.png)
 
-![nemo](nemo.png){ width=150px } _(Nemo profile picture reused from Ace Combat 3: Electrosphere. Developer: Namco. Publisher: Namco)_
-![user](user.png){ width=150px } _(User profile picture reused from Ace Combat 04: Shattered Skies. Developer: Namco. Publisher: Namco)_
+<img src="nemo.png" width="150">_(Nemo profile picture reused from Ace Combat 3: Electrosphere. Developer: Namco. Publisher: Namco)_
+<img src="user.png" width="150"> _(User profile picture reused from Ace Combat 04: Shattered Skies. Developer: Namco. Publisher: Namco)_
 
 &nbsp;
 &nbsp;
@@ -28,7 +28,9 @@ _Save File section below adapted from [AB3 User Guide](https://se-education.org/
 * The save file is in plain text and can be edited directly by advanced users, though great care must be taken to avoid corrupting the file.
 
 > [!CAUTION]
-> If the save file is corrupted, NEMO will not be able to parse the save data correctly, and will behave as if no tasks were ever saved. If the user were to exit the program in this state, the save data would be overriden and permanently lost. For this reason, users who wish to edit the save file should make a backup of it before proceeding.
+> If the save file is corrupted, NEMO will not be able to parse the save data correctly, and will behave as if no tasks were ever saved. 
+> If the user were to exit the program in this state, the save data would be overriden and permanently lost. 
+> For this reason, users who wish to edit the save file should make a backup of it before proceeding.
 
 ## Command Format
 
