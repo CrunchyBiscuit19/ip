@@ -13,10 +13,10 @@ import nemo.exception.IncorrectDateTimeException;
 
 public class EventTest {
     @Test
-    public void eventConstructor_invalidArguments_exceptionThrown() {
+    public void eventConstructor_hasMainArg_incorrectDateTimeExceptionThrown() {
         HashMap<String, String> dummyArgs = new HashMap<>();
-
         dummyArgs.put("mainArg", "test");
+
         try {
             new Event(dummyArgs);
         } catch (ParseException e) {
@@ -28,8 +28,14 @@ public class EventTest {
             fail("IncorrectDateTimeException should not be thrown");
             // @@author
         }
+    }
 
+    @Test
+    public void eventConstructor_noFromDate_parseExceptionThrown() {
+        HashMap<String, String> dummyArgs = new HashMap<>();
+        dummyArgs.put("mainArg", "test");
         dummyArgs.put("priority", "low");
+
         try {
             new Event(dummyArgs);
         } catch (ParseException e) {
@@ -37,8 +43,15 @@ public class EventTest {
         } catch (IncorrectDateTimeException e) {
             fail("IncorrectDateTimeException should not be thrown");
         }
+    }
 
+    @Test
+    public void eventConstructor_noToDate_incorrectDateTimeExceptionThrown() {
+        HashMap<String, String> dummyArgs = new HashMap<>();
+        dummyArgs.put("mainArg", "test");
+        dummyArgs.put("priority", "low");
         dummyArgs.put("from", "a");
+
         try {
             new Event(dummyArgs);
         } catch (ParseException e) {
@@ -46,9 +59,16 @@ public class EventTest {
         } catch (IncorrectDateTimeException e) {
             fail("IncorrectDateTimeException should not be thrown");
         }
+    }
 
+    @Test
+    public void eventConstructor_invalidDateFormats_dateTimeParseExceptionThrown() {
+        HashMap<String, String> dummyArgs = new HashMap<>();
+        dummyArgs.put("mainArg", "test");
+        dummyArgs.put("priority", "low");
         dummyArgs.put("from", "a");
         dummyArgs.put("to", "b");
+
         try {
             new Event(dummyArgs);
         } catch (DateTimeParseException e) {
@@ -58,9 +78,16 @@ public class EventTest {
         } catch (IncorrectDateTimeException e) {
             fail("IncorrectDateTimeException should not be thrown");
         }
+    }
 
+    @Test
+    public void eventConstructor_fromIsAfterTo_incorrectDateTimeExceptionThrown() {
+        HashMap<String, String> dummyArgs = new HashMap<>();
+        dummyArgs.put("mainArg", "test");
+        dummyArgs.put("priority", "low");
         dummyArgs.put("from", "03-03-2026 0000");
         dummyArgs.put("to", "02-02-2026 0000");
+
         try {
             new Event(dummyArgs);
         } catch (DateTimeParseException e) {
@@ -70,9 +97,16 @@ public class EventTest {
         } catch (IncorrectDateTimeException e) {
             assertEquals(e.getMessage(), "From datetime must come strictly before to datetime.");
         }
+    }
 
+    @Test
+    public void eventConstructor_validArguments_noExceptionsThrown() {
+        HashMap<String, String> dummyArgs = new HashMap<>();
+        dummyArgs.put("mainArg", "test");
+        dummyArgs.put("priority", "low");
         dummyArgs.put("from", "01-01-2026 0000");
         dummyArgs.put("to", "02-02-2026 0000");
+
         try {
             new Event(dummyArgs);
         } catch (DateTimeParseException e) {

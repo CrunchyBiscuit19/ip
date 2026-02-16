@@ -80,28 +80,15 @@ public class Loader {
 
             switch (type) {
             case "T":
-                if (data.length < SaveFileFields.TODO_NUM_FIELDS.index) {
-                    throw new IllegalArgumentException(MessageFormat.format("Invalid todo format: {0}", rawTask));
-                }
-                newTask = new Todo(goal, isDone, priority);
+                newTask = loadTodo(rawTask, data, goal, isDone, priority);
                 break;
 
             case "D":
-                if (data.length < SaveFileFields.DEADLINE_NUM_FIELDS.index) {
-                    throw new IllegalArgumentException(
-                            MessageFormat.format("Invalid deadline format: {0}", rawTask));
-                }
-                String byRawDate = data[SaveFileFields.BY_DATE.index].trim();
-                newTask = new Deadline(goal, byRawDate, isDone, priority);
+                newTask = loadDeadline(rawTask, data, goal, isDone, priority);
                 break;
 
             case "E":
-                if (data.length < SaveFileFields.EVENT_NUM_FIELDS.index) {
-                    throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
-                }
-                String fromRawDate = data[SaveFileFields.FROM_DATE.index].trim();
-                String toRawDate = data[SaveFileFields.TO_DATE.index].trim();
-                newTask = new Event(goal, fromRawDate, toRawDate, isDone, priority);
+                newTask = loadEvent(rawTask, data, goal, isDone, priority);
                 break;
 
             default:
@@ -111,6 +98,64 @@ public class Loader {
             store.add(newTask);
         }
 
+    }
+
+    /**
+     * Load todo tasks, and does error handling
+     *
+     * @param rawTask The raw string of the task
+     * @param data The data of the task
+     * @param goal The goal of the task
+     * @param isDone The doneness of the task
+     * @param priority The priority of the task
+     * @return
+     */
+    private Todo loadTodo(String rawTask, String[] data, String goal, Boolean isDone, Priority priority) {
+        if (data.length < SaveFileFields.TODO_NUM_FIELDS.index) {
+            throw new IllegalArgumentException(MessageFormat.format("Invalid todo format: {0}", rawTask));
+        }
+        Todo newTask = new Todo(goal, isDone, priority);
+        return newTask;
+    }
+
+    /**
+     * Load deadline tasks, and does error handling
+     *
+     * @param rawTask The raw string of the task
+     * @param data The data of the task
+     * @param goal The goal of the task
+     * @param isDone The doneness of the task
+     * @param priority The priority of the task
+     * @return
+     */
+    private Deadline loadDeadline(String rawTask, String[] data, String goal, Boolean isDone, Priority priority) {
+        if (data.length < SaveFileFields.DEADLINE_NUM_FIELDS.index) {
+            throw new IllegalArgumentException(
+                    MessageFormat.format("Invalid deadline format: {0}", rawTask));
+        }
+        String byRawDate = data[SaveFileFields.BY_DATE.index].trim();
+        Deadline newTask = new Deadline(goal, byRawDate, isDone, priority);
+        return newTask;
+    }
+
+    /**
+     * Load event tasks, and does error handling
+     *
+     * @param rawTask The raw string of the task
+     * @param data The data of the task
+     * @param goal The goal of the task
+     * @param isDone The doneness of the task
+     * @param priority The priority of the task
+     * @return
+     */
+    private Event loadEvent(String rawTask, String[] data, String goal, Boolean isDone, Priority priority) {
+        if (data.length < SaveFileFields.EVENT_NUM_FIELDS.index) {
+            throw new IllegalArgumentException(MessageFormat.format("Invalid event format: {0}", rawTask));
+        }
+        String fromRawDate = data[SaveFileFields.FROM_DATE.index].trim();
+        String toRawDate = data[SaveFileFields.TO_DATE.index].trim();
+        Event newTask = new Event(goal, fromRawDate, toRawDate, isDone, priority);
+        return newTask;
     }
 
     /**

@@ -31,7 +31,7 @@ public class DialogBox extends HBox {
      *
      * @param text   dialog text
      * @param image  profile image of dialog box
-     * @param hasError whether the command output from nemo has an error
+     * @param hasError whether the command output from —nemo has an error
      */
     private DialogBox(String text, Image image, Boolean hasError) {
         try {
