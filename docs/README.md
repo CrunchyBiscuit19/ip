@@ -10,14 +10,27 @@
 
 Nemo is a desktop program used for managing personal tasks. It functions as an interactive chatbot with elements of the Command Line Interface (CLI) presented with a Graphical User Interface (GUI).
 
+## Quick Start
+
+1. Ensure **Java 17** is installed on your computer.
+2. Download the latest binary from [releases page](https://github.com/CrunchyBiscuit19/ip/releases).
+3. Navigate to the binary directory and run `java -jar nemo.jar`.
+
 ## Save File
 
 _Save File section below adapted from [AB3 User Guide](https://se-education.org/addressbook-level3/UserGuide.html#features) by National University of Singapore Cs2103/T teaching team._
 
 ### Location
 
-* The save file is located at `C:\Users\{user}\NEMO\data.txt` on Windows and `~/NEMO/data.txt` on Linux.
+* The save file is located in the locations below, depending on the user's Operating System.
 * If this save file is not found, or could not be opened for whatever reason, NEMO will warn the user with a red notification message on the top of the screen.  
+
+
+| Operating System | Default Storage Path                              |
+| :--- |:--------------------------------------------------|
+| **Windows** | `C:\Users\{user}\NEMO\data.txt`                   |
+| **macOS** | `/Users/<User>/NEMO/data.txt`                |
+| **Linux** | `/home/<User>/NEMO/data.txt`                                   |
 
 ### Saving 
 
@@ -49,16 +62,16 @@ _Command Format section below adapted from [AB3 User Guide](https://se-education
 
 Add a new Todo task to the NEMO task list.
 
-`todo [TODO_TASK] /priority [PRIORITY]`
+`todo TODO_TASK /priority PRIORITY`
 
 * `TODO_TASK` String describing the Todo task to be added.
 * `PRIORITY` Either `LOW`, `MED`, `HIGH` describing the priority level of the task (case-insensitive).
 
-Example:
+**Example:**
 `todo Go to gym /priority LOW` 
 Adds a Todo task with goal "Go to gym" with a `LOW` priority level.
 
-Output:
+**Output:**
 ```
 I've added this task:
 [LOW ][T][ ] Go to gym
@@ -69,17 +82,17 @@ Now you have 1 tasks in the list.
 
 Add a new Deadline task to the NEMO task list.
 
-`todo [DEADLINE_TASK] /by [BY_DATETIME] /priority [PRIORITY]`
+`deadline DEADLINE_TASK /by BY_DATETIME /priority PRIORITY`
 
 * `DEADLINE_TASK` String describing the Deadline task to be added.
 * `BY_DATETIME` Datetime string in format `dd-MM-yyyy HHmm` format, which the task needs to be completed by.
 * `PRIORITY` Either `LOW`, `MED`, `HIGH` describing the priority level of the task (case-insensitive).
 
-Example:
+**Example:**
 `deadline Buy concert tickets /by 03-03-2026 0600 /priority MED` 
 Adds a DEADLINE task with goal "Buy concert tickets", by 03-03-2026 0600, with a `MED` priority level.
 
-Output:
+**Output:**
 ```
 I've added this task:
 [MED ][D][ ] Buy concert tickets (by: 03-03-2026 0600)
@@ -90,18 +103,18 @@ Now you have 2 tasks in the list.
 
 Add a new Event task to the NEMO task list.
 
-`todo [EVENT_TASK] /from [FROM_DATETIME] /to [TO_DATETIME] /priority [PRIORITY]`
+`event EVENT_TASK /from FROM_DATETIME /to TO_DATETIME /priority PRIORITY`
 
 * `EVENT_TASK` String describing the Event task to be added.
 * `FROM_DATETIME` Datetime string in format `dd-MM-yyyy HHmm` format, which the task starts at. Must be strictly before `TO_DATETIME`.
 * `TO_DATETIME` Datetime string in format `dd-MM-yyyy HHmm` format, which the task ends at.
 * `PRIORITY` Either `LOW`, `MED`, `HIGH` describing the priority level of the task (case-insensitive).
 
-Example:
+**Example:**
 `event Attend wedding /from 03-03-2026 1200 /to 03-03-2026 1400 /priority HIGH` 
 Adds a EVENT task with goal "Attend wedding", from 03-03-2026 1200 to 03-03-2026 1400, with a `HIGH` priority level.
 
-Output:
+**Output:**
 ```
 I've added this task:
 [HIGH][E][ ] Attend wedding (from: 03-03-2026 1200 to: 03-03-2026 1400)
@@ -116,10 +129,10 @@ List the currently loaded tasks, optionally filtered by priority.
 
 * `PRIORITY` Either `LOW`, `MED`, `HIGH` describing the priority level of the tasks to display, if filtered. If not used, all tasks will be displated.
 
-Example:
+**Example:**
 `list` Lists all tasks available.
 
-Output:
+**Output:**
 ```
 Here are the tasks in your list:
 001. [LOW ][T][ ] Go to gym
@@ -127,10 +140,10 @@ Here are the tasks in your list:
 003. [HIGH][E][ ] Attend wedding (from: 03-03-2026 1200 to: 03-03-2026 1400)
 ```
 
-Example:
+**Example:**
 `list /filter LOW` Lists all tasks available with LOW priority level.
 
-Output:
+**Output:**
 ```
 Here are the tasks in your filtered list:
 001. [LOW ][T][ ] Go to gym
@@ -144,10 +157,10 @@ Find tasks with goals that fit a search query.
 
 * `QUERY` The string to search the tasks for. Case-sensitive.
 
-Example:
+**Example:**
 `find Buy` Finds all tasks with goals containing the string "Buy".
 
-Output:
+**Output:**
 ```
 001. [MED ][D][ ] Buy concert tickets (by: 03-03-2026 0600)
 ```
@@ -160,10 +173,10 @@ Mark tasks specified by the index assigned with the `list` command. Has no effec
 
 * `INDEX` The index assigned to tasks with the `list` command.
 
-Example:
+**Example:**
 `mark 1` Marks the first task that is listed with the `list` command.
 
-Output:
+**Output:**
 ```
 I've marked this task as done:
 [LOW ][T][X] Go to gym
@@ -177,10 +190,10 @@ Unmark tasks specified by the index assigned with the `list` command. Has no eff
 
 * `INDEX` The index assigned to tasks with the `list` command.
 
-Example:
+**Example:**
 `unmark 1` Unmarks the first task that is listed with the `list` command.
 
-Output:
+**Output:**
 ```
 I've marked this task as not done yet:
 [LOW ][T][ ] Go to gym
@@ -194,10 +207,10 @@ Sort tasks based on their priority level, in increasing or decreasing levels of 
 
 * `DIRECTION` is either `UP` for sorting tasks by increasing levels of priority, or `DOWN` for sorting tasks by decreasing levels of priority. 
 
-Example:
+**Example:**
 `sort /direction DOWN` Sorts tasks by decreasing levels of priority.
 
-Output:
+**Output:**
 ```
 Here are the tasks in your list:
 001. [HIGH][E][ ] Attend wedding (from: 03-03-2026 1200 to: 03-03-2026 1400)
@@ -213,10 +226,10 @@ Delete tasks specified by the index assigned with the `list` command.
 
 * `INDEX` The index assigned to tasks with the `list` command.
 
-Example:
+**Example:**
 `delete 2` Deletes the second task that is listed with the `list` command.
 
-Output:
+**Output:**
 ```
 I've removed this task:
 [MED ][D][ ] Buy concert tickets (by: 03-03-2026 0600)
@@ -229,10 +242,26 @@ Exit the NEMO program. NEMO will save your tasks to file and close the window af
 
 `bye`
 
-Example:
+**Example:**
 `bye` Save your tasks to file and close the window after a short delay.
 
-Output:
+**Output:**
 ```
 Bye.
 ```
+
+## Commands Summary
+
+
+| Action                | Format                                                                     | Examples                                                                        |
+|-----------------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| **Add Todo Task**     | `todo TODO_TASK /priority PRIORITY`                                        | `todo Go to gym /priority LOW`                                                  |
+| **Add Deadline Task** | `deadline DEADLINE_TASK /by BY_DATETIME /priority PRIORITY`                | `deadline Buy concert tickets /by 03-03-2026 0600 /priority MED`                |
+| **Add Event Task**    | `event EVENT_TASK /from FROM_DATETIME /to TO_DATETIME /priority PRIORITY`  | `event Attend wedding /from 03-03-2026 1200 /to 03-03-2026 1400 /priority HIGH` |
+| **List Tasks**        | `list [/filter PRIORITY]`                                                  | `list /filter LOW`                                                              |
+| **Find Tasks**        | `find QUERY`                                                               | `find buy`                                                                      |
+| **Mark Tasks**        | `mark INDEX`                                                               | `mark 1`                                                                        |
+| **Unmark Tasks**      | `unmark INDEX`                                                             | `unmark 1`                                                                      |
+| **Sort Tasks**        | `sort /direction DIRECTION`                                                | `sort /direction DOWN`                                                          |
+| **Delete Tasks**      | `delete INDEX`                                                             | `delete 1`                                                                      |
+| **Exit NEMO**         | `bye`                                                                      | `bye`                                                                           |
