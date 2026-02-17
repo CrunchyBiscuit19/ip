@@ -14,14 +14,13 @@ import nemo.task.Task;
  * Collection of Task objects.
  */
 public class Store {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public Store() {
         this.tasks = new ArrayList<>();
     }
 
     public Task get(int id) {
-        assert this.tasks != null : "Store tasks list is null";
         assert id >= 0 && id < this.tasks.size() : "Index out of bounds: " + id;
         return this.tasks.get(id);
     }
@@ -56,7 +55,6 @@ public class Store {
      * @param i The index to remove the task from the list
      */
     public void remove(int i) {
-        assert this.tasks != null : "Store tasks list is null";
         assert i >= 0 && i < this.tasks.size() : "Index out of bounds: " + i;
         this.tasks.remove(i);
     }
@@ -67,7 +65,6 @@ public class Store {
      * @return size of the store tasks list
      */
     public int size() {
-        assert this.tasks != null : "Store tasks list is null";
         return this.tasks.size();
     }
 
@@ -77,12 +74,10 @@ public class Store {
      * @return boolean if the store tasks list is empty or not
      */
     public boolean isEmpty() {
-        assert this.tasks != null : "Store tasks list is null";
         return this.tasks.isEmpty();
     }
 
     public Iterator<Task> getIterator() {
-        assert this.tasks != null : "Store tasks list is null";
         // @@author CrunchyBiscuit19-reused
         // Reused from https://www.geeksforgeeks.org/java/iterators-in-java/
         // with minor modifications
@@ -97,7 +92,6 @@ public class Store {
     */
     public ArrayList<Task> filterByPriority(Priority filteredPriority) {
         assert filteredPriority != null : "filteredPriority cannot be null";
-        assert this.tasks != null : "Store tasks list is null";
         return new ArrayList<>(tasks.stream()
                 .filter(t -> {
                     assert t != null : "task in store is null";
@@ -109,10 +103,9 @@ public class Store {
     /**
      * Sort the tasks by their priorities
      *
-     * @param shouldSortHighestPriorityFirst Whether to sort highest priorities at the top
+     * @param shouldSortHighestPriorityFirst Whether to sort the highest priorities at the top
      */
     public void sortByPriority(boolean shouldSortHighestPriorityFirst) {
-        assert this.tasks != null : "Store tasks list is null";
         assert tasks.stream().allMatch(t -> t != null && t.getPriority() != null) : "Found task with null priority";
         if (shouldSortHighestPriorityFirst) {
             tasks.sort(Comparator.comparing(Task::getPriority));
@@ -127,12 +120,11 @@ public class Store {
      * @return list of task summaries
      */
     public String generateList() {
-        assert this.tasks != null : "Store tasks list is null";
         return generateListFormattedTasks(tasks);
     }
 
     /**
-     * Find tasks whioh contain the query line
+     * Find tasks which contain the query line
      *
      * @param query
      *            string to match tasks against
@@ -145,7 +137,7 @@ public class Store {
         while (tasksIt.hasNext()) {
             Task task = tasksIt.next();
             assert task != null : "task in store is null";
-            if (task.getDescription().contains(query)) {
+            if (task.getGoal().contains(query)) {
                 matchedTasks.add(task);
             }
         }
